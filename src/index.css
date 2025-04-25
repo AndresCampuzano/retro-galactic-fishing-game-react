@@ -1,3 +1,43 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html,
+body {
+  font-family: "VT323", monospace;
+  font-size: 18px;
+  box-sizing: border-box;
+  cursor: url("/images/cursor.cur"), auto;
+  overflow: hidden;
+}
+
+html {
+  height: 100%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+::-webkit-scrollbar-track {
+  background: #c9c9c9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c3c3c3;
+  border-top: 2.5px solid #ffffff;
+  border-left: 2.5px solid #ffffff;
+  border-right: 2.5px solid #000000;
+  border-bottom: 2.5px solid #000000;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a9a9a9;
+}
