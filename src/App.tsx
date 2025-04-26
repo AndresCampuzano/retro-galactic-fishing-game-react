@@ -7,7 +7,7 @@ import { StartMenu } from "./components/StartMenu.tsx";
 const UI_ELEMENTS = {
   aboutMe: {
     img: "images/my-computer.png",
-    title: "About Me",
+    title: "About this Project",
   },
   leaderboard: {
     img: "images/leaderboard.png",

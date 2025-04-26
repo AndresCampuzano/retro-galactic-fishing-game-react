@@ -18,7 +18,7 @@ export const ItemDesktop = ({
   return (
     <div
       onClick={isViewAlreadyEnabled ? () => null : handleOpenWindow}
-      className="absolute  flex flex-col items-center cursor-pointer w-[110px]"
+      className="absolute flex flex-col items-center text-center cursor-pointer w-[110px] active:border active:border-black active:border-t-white active:border-l-white"
       style={{
         top: `${top}px`,
         left: `${left}px`,
@@ -29,7 +29,9 @@ export const ItemDesktop = ({
         alt={title}
         style={{ width: imageSize, height: imageSize }}
       />
-      <p className="text-center mt-2.5 text-[24px]">{title}</p>
+      <p className="text-center mt-2.5 text-[24px] leading-[0.8]">
+        {title}
+      </p>{" "}
     </div>
   );
 };
