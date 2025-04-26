@@ -1,10 +1,11 @@
+import { Screen } from "./components/Screen.tsx";
+import { BottomBar } from "./components/BottomBar.tsx";
+
 function App() {
   return (
-    <>
-      <div className="bg-red-400">
-        <p>RETRO GALACTIC FISHING GAME</p>
-      </div>
-    </>
+    <Screen>
+      <BottomBar />
+    </Screen>
   );
 }
 
