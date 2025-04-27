@@ -60,6 +60,11 @@ export default defineConfig({
             sizes: "48x48",
             type: "image/png",
           },
+          {
+            src: "/images/logo144.png",
+            sizes: "144x144",
+            type: "image/png",
+          },
         ],
       },
       workbox: {
