@@ -78,12 +78,7 @@ function App() {
    * Handle click on floating window to bring it to the front
    */
   const onClickOnAlreadyOpenedWindow = (windowTitle: string) => {
-    console.log("onClickOnAlreadyOpenedWindow ", windowTitle);
     bringWindowToFront(windowTitle);
-  };
-
-  const handleStartMenu = () => {
-    setStartMenu((prev) => !prev);
   };
 
   /**
@@ -95,6 +90,9 @@ function App() {
     return index + 1;
   };
 
+  const handleStartMenu = () => {
+    setStartMenu((prev) => !prev);
+  };
   return (
     <Screen>
       {/* Items Desktop Grid */}
@@ -170,7 +168,7 @@ function App() {
           )}
         </div>
       </div>
-      {showStartMenu && <StartMenu handleStartMenu={handleStartMenu} />}
+      {showStartMenu && <StartMenu onCloseStartMenu={handleStartMenu} />}
       <BottomBar handleStartMenu={handleStartMenu}>
         <PrimaryButton>
           <img
