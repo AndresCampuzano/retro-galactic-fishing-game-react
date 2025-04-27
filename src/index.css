@@ -32,10 +32,10 @@ html {
 
 ::-webkit-scrollbar-thumb {
   background: #c3c3c3;
-  border-top: 2.5px solid #ffffff;
-  border-left: 2.5px solid #ffffff;
-  border-right: 2.5px solid #000000;
-  border-bottom: 2.5px solid #000000;
+  border-top: 2.5px solid #fff;
+  border-left: 2.5px solid #fff;
+  border-right: 2.5px solid #000;
+  border-bottom: 2.5px solid #000;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -45,18 +45,24 @@ html {
 .initial-screen {
   background-color: #212121;
   height: 100vh;
+}
 
-  span {
-    color: #fafafa;
-    font-size: 1.5rem;
-  }
+.initial-screen span {
+  color: #fafafa;
+  font-size: 1.5rem;
+}
 
-  .blinker {
-    opacity: 1;
-    margin-bottom: -2px;
-    height: 15px;
-    margin-left: -5px;
-    border-left: 7px solid #fafafa;
-    animation: blinker 0.6s steps(2, start) infinite;
+.blinker {
+  opacity: 1;
+  margin-bottom: -2px;
+  height: 15px;
+  margin-left: -5px;
+  border-left: 7px solid #fafafa;
+  animation: blinker 0.6s steps(2, start) infinite;
+}
+
+@keyframes blinker {
+  to {
+    visibility: hidden;
   }
 }

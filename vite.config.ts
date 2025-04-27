@@ -1,47 +1,76 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import { VitePWA } from 'vite-plugin-pwa'
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import { VitePWA } from "vite-plugin-pwa";
+import imagemin from "vite-plugin-imagemin";
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
     react(),
+    imagemin({
+      gifsicle: {
+        optimizationLevel: 7,
+        interlaced: false,
+      },
+      optipng: {
+        optimizationLevel: 7,
+      },
+      mozjpeg: {
+        quality: 65,
+      },
+      pngquant: {
+        quality: [0.7, 0.8],
+        speed: 4,
+      },
+      svgo: {
+        plugins: [
+          {
+            name: "removeViewBox",
+          },
+          {
+            name: "removeEmptyAttrs",
+            active: false,
+          },
+        ],
+      },
+    }),
     VitePWA({
-      registerType: 'autoUpdate',
-      injectRegister: 'auto',
-      includeAssets: ['**/*'],
+      registerType: "autoUpdate",
+      injectRegister: "auto",
+      includeAssets: ["*.ico", "*.png", "*.svg"],
       manifest: {
-        name: 'Retro Galactic Fishing Game',
-        short_name: 'RetroFishing',
-        description: 'A retro-style galactic fishing game with Windows 95 aesthetic',
-        theme_color: '#008080',
+        name: "Retro Galactic Fishing Game",
+        short_name: "RetroFishing",
+        description:
+          "A retro-style galactic fishing game with Windows 95 aesthetic",
+        theme_color: "#008080",
         icons: [
           {
-            src: 'public/images/windows-logo.png',
-            sizes: '192x192',
-            type: 'image/png',
+            src: "public/images/windows-logo.png",
+            sizes: "192x192",
+            type: "image/png",
           },
           {
-            src: 'public/images/windows-logo.png',
-            sizes: '512x512',
-            type: 'image/png',
+            src: "public/images/windows-logo.png",
+            sizes: "512x512",
+            type: "image/png",
           },
           {
-            src: 'public/images/windows-logo.png',
-            sizes: '512x512',
-            type: 'image/png',
-            purpose: 'any maskable',
+            src: "public/images/windows-logo.png",
+            sizes: "512x512",
+            type: "image/png",
+            purpose: "any maskable",
           },
         ],
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,jpg,jpeg,gif,cur}'],
+        globPatterns: ["**/*.{js,css,html,ico}", "images/*.{png,jpg,svg}"],
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/api\..*\.com\/.*/i,
-            handler: 'NetworkFirst',
+            handler: "NetworkFirst",
             options: {
-              cacheName: 'api-cache',
+              cacheName: "api-cache",
               expiration: {
                 maxEntries: 100,
                 maxAgeSeconds: 60 * 60 * 24 * 7, // 1 week
@@ -53,4 +82,40 @@ export default defineConfig({
       },
     }),
   ],
-})
+  build: {
+    minify: "terser",
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+        pure_funcs: ["console.log", "console.info", "console.debug"],
+      },
+      format: {
+        comments: false,
+      },
+    },
+    rollupOptions: {
+      output: {
+        // code splitting
+        manualChunks: {
+          "react-vendor": ["react", "react-dom"],
+          "ui-components": ["react-draggable", "react-outside-click-handler"],
+        },
+        // avoid hash assets since we're using service worker cache
+        assetFileNames: "assets/[name].[ext]",
+      },
+    },
+    chunkSizeWarningLimit: 500,
+    sourcemap: false,
+    assetsInlineLimit: 4096,
+    reportCompressedSize: false,
+  },
+  optimizeDeps: {
+    include: [
+      "react",
+      "react-dom",
+      "react-draggable",
+      "react-outside-click-handler",
+    ],
+  },
+});
