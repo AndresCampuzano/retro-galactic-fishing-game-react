@@ -8,3 +8,12 @@ createRoot(document.getElementById("root")!).render(
     <App />
   </StrictMode>,
 );
+
+// Register service worker for PWA offline support
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    console.log(
+      "Application loaded. Service worker will be registered automatically.",
+    );
+  });
+}

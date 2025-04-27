@@ -1,5 +1,6 @@
 /**
  * Generic fetch utility for making API requests with robust error handling and response parsing.
+ * Supports offline mode by storing and retrieving cached responses when network is unavailable.
  *
  * @template T The expected return type from the API
  * @param baseUrl The base URL of the API service
@@ -37,31 +38,78 @@ export async function fetchFromService<T>(
     });
   }
 
-  const response = await fetch(url.toString(), {
-    ...init,
-    headers: {
-      ...(init?.headers ?? { "Content-Type": "application/json" }),
-    },
-  });
+  const cacheKey = `api-cache:${url.toString()}:${init?.method || 'GET'}`;
 
-  if (!response.ok) {
-    let errorMessage = `Error ${response.status}: ${response.statusText}`;
+  // Check if we're offline
+  if (!navigator.onLine) {
+    console.log('Offline mode: fetching from cache for', url.toString());
+    const cachedData = localStorage.getItem(cacheKey);
+    if (cachedData) {
+      try {
+        return JSON.parse(cachedData) as T;
+      } catch (e) {
+        console.error('Error parsing cached data:', e);
+        throw new Error('You are offline and cached data is unavailable');
+      }
+    } else {
+      throw new Error('You are offline and no cached data is available for this request');
+    }
+  }
 
-    const errorBody = await response.json();
-    if (errorBody?.message) {
-      errorMessage = errorBody.message;
+  try {
+    const response = await fetch(url.toString(), {
+      ...init,
+      headers: {
+        ...(init?.headers ?? { "Content-Type": "application/json" }),
+      },
+    });
+
+    if (!response.ok) {
+      let errorMessage = `Error ${response.status}: ${response.statusText}`;
+
+      try {
+        const errorBody = await response.json();
+        if (errorBody?.message) {
+          errorMessage = errorBody.message;
+        }
+      } catch {
+        // If parsing JSON fails, use the default error message
+      }
+
+      throw new Error(errorMessage);
     }
 
-    throw new Error(errorMessage);
-  }
+    if (
+      response.status === 204 ||
+      response.headers.get("Content-Length") === "0"
+    ) {
+      return null as T;
+    }
 
-  if (
-    response.status === 204 ||
-    response.headers.get("Content-Length") === "0"
-  ) {
-    return null as T;
+    const text = await response.text();
+    if (!text) return null as T;
+    
+    const data = JSON.parse(text) as T;
+    
+    // Cache successful responses for offline use
+    if (init?.method === undefined || init?.method === 'GET') {
+      try {
+        localStorage.setItem(cacheKey, JSON.stringify(data));
+      } catch (e) {
+        console.warn('Failed to cache API response:', e);
+      }
+    }
+    
+    return data;
+  } catch (error) {
+    // For network errors, try to return cached data as fallback
+    if (!navigator.onLine || error instanceof TypeError && error.message.includes('network')) {
+      const cachedData = localStorage.getItem(cacheKey);
+      if (cachedData) {
+        console.log('Network error, using cached data for', url.toString());
+        return JSON.parse(cachedData) as T;
+      }
+    }
+    throw error;
   }
-
-  const text = await response.text();
-  return text ? (JSON.parse(text) as T) : (null as T);
 }

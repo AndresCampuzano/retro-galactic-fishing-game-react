@@ -1,11 +1,29 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export const InitialScreen = () => {
+  const [isOffline, setIsOffline] = useState(!navigator.onLine);
+
+  useEffect(() => {
+    const handleOnlineStatusChange = () => {
+      setIsOffline(!navigator.onLine);
+    };
+
+    window.addEventListener("online", handleOnlineStatusChange);
+    window.addEventListener("offline", handleOnlineStatusChange);
+
+    return () => {
+      window.removeEventListener("online", handleOnlineStatusChange);
+      window.removeEventListener("offline", handleOnlineStatusChange);
+    };
+  }, []);
+
   useEffect(() => {
     const data = [
       {
         windows95message:
-          "<span>Starting Windows 95...</br/></br/>Windows is bypassing your startup files.</br/></br/>Loading...</br/>Loading...</span>",
+          "<span>Starting Windows 95..." +
+          (isOffline ? "<br/><br/><strong>OFFLINE MODE ENABLED</strong>" : "") +
+          "</br/></br/>Windows is bypassing your startup files.</br/></br/>Loading...</br/>Loading...</span>",
       },
     ];
 
@@ -35,7 +53,8 @@ export const InitialScreen = () => {
         setTimeout(type, 30);
       })();
     }
-  }, []);
+  }, [isOffline]);
+
   return (
     <div className="initial-screen">
       <img src="images/windows-logo.png" alt="windows 95 logo" width="80px" />
