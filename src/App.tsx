@@ -33,8 +33,7 @@ function App() {
 
   const { height, width, isMobile } = useWindowDimensions();
 
-  // Calculate 80% of the screen height and subtract 60px
-  const calculatedMaxHeight = height * 0.8 - 60;
+  const calculatedMaxHeight = height * 0.8 - 60; // Calculate the max height of the floating window
 
   useEffect(() => {
     // Opening windows when page loads
@@ -42,6 +41,9 @@ function App() {
     setOpenWindows((prev) => [...prev, UI_ELEMENTS.leaderboard.title]);
   }, []);
 
+  /**
+   * Bring the window to the front by removing it from the current position
+   */
   const bringWindowToFront = (windowTitle: string) => {
     setOpenWindows((prev) => {
       const newWindows = prev.filter((w) => w !== windowTitle);
@@ -93,11 +95,13 @@ function App() {
     setStartMenu((prev) => !prev);
   };
 
-  // Determine z-index for each window based on order in openWindows array
+  /**
+   * Determine z-index for each window based on order in openWindows array
+   */
   const getZIndex = (windowTitle: string) => {
     const index = openWindows.indexOf(windowTitle);
     if (index === -1) return 0;
-    return index + 1; // Higher index = higher z-index = appears on top
+    return index + 1;
   };
 
   return (

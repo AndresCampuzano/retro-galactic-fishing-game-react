@@ -19,12 +19,12 @@ export const Window = ({
   const nodeRef = useRef<any>(null);
   const [enableDrag, setEnableDrag] = useState(true);
 
-  function onMouseEnterFunction() {
+  const onMouseEnterFunction = () => {
     setEnableDrag(false);
-  }
-  function onMouseLeaveFunction() {
+  };
+  const onMouseLeaveFunction = () => {
     setEnableDrag(true);
-  }
+  };
   return (
     <Draggable
       nodeRef={nodeRef}
