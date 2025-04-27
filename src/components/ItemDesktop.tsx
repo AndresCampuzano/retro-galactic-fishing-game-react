@@ -29,9 +29,7 @@ export const ItemDesktop = ({
         alt={title}
         style={{ width: imageSize, height: imageSize }}
       />
-      <p className="text-center mt-2.5 text-[24px] leading-[0.8]">
-        {title}
-      </p>{" "}
+      <p className="text-center mt-2.5 text-[24px] leading-[0.8]">{title}</p>
     </div>
   );
 };

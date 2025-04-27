@@ -3,6 +3,8 @@ import { BottomBar } from "./components/BottomBar.tsx";
 import { ItemDesktop } from "./components/ItemDesktop.tsx";
 import { useEffect, useState } from "react";
 import { StartMenu } from "./components/StartMenu.tsx";
+import { Leaderboard } from "./components/Leaderboard.tsx";
+import { SetAboutMe } from "./components/SetAboutMe.tsx";
 
 const UI_ELEMENTS = {
   aboutMe: {
@@ -29,8 +31,8 @@ function App() {
 
   useEffect(() => {
     // Opening windows when page loads
-    setAboutMe(true);
-    setOpenWindows((prev) => [...prev, UI_ELEMENTS.aboutMe.title]);
+    setLeaderboard(true);
+    setOpenWindows((prev) => [...prev, UI_ELEMENTS.leaderboard.title]);
   }, []);
 
   const handleWindowAbout = () => {
@@ -95,6 +97,24 @@ function App() {
             top={245}
             left={5}
           />
+          {openWindows.includes(UI_ELEMENTS.leaderboard.title) &&
+            showLeaderboard && (
+              <Leaderboard
+                key={UI_ELEMENTS.leaderboard.title}
+                iconImg={UI_ELEMENTS.leaderboard.img}
+                title={UI_ELEMENTS.leaderboard.title}
+                handleCloseWindow={handleLeaderboard}
+              />
+            )}
+
+          {openWindows.includes(UI_ELEMENTS.aboutMe.title) && showAboutMe && (
+            <SetAboutMe
+              key={UI_ELEMENTS.aboutMe.title}
+              iconImg={UI_ELEMENTS.aboutMe.img}
+              title={UI_ELEMENTS.aboutMe.title}
+              handleCloseWindow={handleWindowAbout}
+            />
+          )}
         </div>
       </div>
       {showStartMenu && <StartMenu handleStartMenu={handleStartMenu} />}
