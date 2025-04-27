@@ -10,6 +10,8 @@ import { GameMarketContent } from "./components/floating-windows-content/GameMar
 import { AboutContent } from "./components/floating-windows-content/AboutContent.tsx";
 import { PrimaryButton } from "./components/PrimaryButton.tsx";
 import { InitialScreen } from "./components/InitialScreen.tsx";
+import { useFetch } from "./hooks/useFetch.ts";
+import { fetchGameLeaderboard } from "./api/game.service.ts";
 
 const UI_ELEMENTS = {
   aboutMe: {
@@ -30,13 +32,21 @@ function App() {
   const [showStartMenu, setStartMenu] = useState<boolean>(false);
   const [showInitialScreen, setShowInitialScreen] = useState<boolean>(true);
   const [openWindows, setOpenWindows] = useState<string[]>([]);
-
   const { height, width, isMobile } = useWindowDimensions();
-
   const calculatedMaxHeight = height * 0.8 - 60; // Calculate the max height of the floating window
   const [windowHeight, setWindowHeight] = useState<string | number>(
     calculatedMaxHeight,
   );
+
+  const { data, error, loading } = useFetch(fetchGameLeaderboard, true);
+
+  useEffect(() => {
+    console.log({
+      data,
+      error,
+      loading,
+    });
+  }, [data, error, loading]);
 
   // Showing initial screen for 3.5 seconds when the page loads
   useEffect(() => {

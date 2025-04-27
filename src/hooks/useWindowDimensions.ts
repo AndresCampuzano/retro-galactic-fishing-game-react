@@ -2,6 +2,10 @@ import { useState, useEffect, useCallback } from "react";
 
 /**
  * Custom hook to get the window dimensions and check if the device is mobile.
+ * @returns {Object} An object containing:
+ * - isMobile: Boolean indicating if the device is mobile
+ * - width: The current window width
+ * - height: The current window height
  */
 export const useWindowDimensions = (): {
   isMobile: boolean;
