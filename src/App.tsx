@@ -193,7 +193,9 @@ function App() {
               alt={UI_ELEMENTS.leaderboard.title}
               className="w-7 h-7 object-contain"
             />
-            <p className="hidden sm:block">{UI_ELEMENTS.leaderboard.title}</p>
+            <p className="hidden sm:block leading-[0.8]">
+              {UI_ELEMENTS.leaderboard.title}
+            </p>
           </PrimaryButton>
         )}
 
@@ -208,7 +210,9 @@ function App() {
               alt={UI_ELEMENTS.aboutMe.title}
               className="w-7 h-7 object-contain"
             />
-            <p className="hidden sm:block">{UI_ELEMENTS.aboutMe.title}</p>
+            <p className="hidden sm:block leading-[0.8]">
+              {UI_ELEMENTS.aboutMe.title}
+            </p>
           </PrimaryButton>
         )}
 
@@ -223,7 +227,9 @@ function App() {
               alt={UI_ELEMENTS.gameMarket.title}
               className="w-7 h-7 object-contain"
             />
-            <p className="hidden sm:block">{UI_ELEMENTS.gameMarket.title}</p>
+            <p className="hidden sm:block leading-[0.8]">
+              {UI_ELEMENTS.gameMarket.title}
+            </p>
           </PrimaryButton>
         )}
       </BottomBar>
