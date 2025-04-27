@@ -7,6 +7,7 @@ import { Window } from "./components/Window.tsx";
 import { useWindowDimensions } from "./hooks/useWindowDimensions.ts";
 import { AboutContent } from "./components/floating-windows-content/AboutContent.tsx";
 import { LeaderboardContent } from "./components/floating-windows-content/LeaderboardContent.tsx";
+import { PrimaryButton } from "./components/PrimaryButton.tsx";
 
 const UI_ELEMENTS = {
   aboutMe: {
@@ -170,7 +171,24 @@ function App() {
         </div>
       </div>
       {showStartMenu && <StartMenu handleStartMenu={handleStartMenu} />}
-      <BottomBar handleStartMenu={handleStartMenu} />
+      <BottomBar handleStartMenu={handleStartMenu}>
+        <PrimaryButton>
+          <img
+            src={UI_ELEMENTS.aboutMe.img}
+            alt={UI_ELEMENTS.aboutMe.title}
+            className="w-7 h-7"
+          />
+          <p>{UI_ELEMENTS.aboutMe.title}</p>
+        </PrimaryButton>
+        <PrimaryButton>
+          <img
+            src={UI_ELEMENTS.leaderboard.img}
+            alt={UI_ELEMENTS.leaderboard.title}
+            className="w-7 h-7"
+          />
+          <p>{UI_ELEMENTS.leaderboard.title}</p>
+        </PrimaryButton>
+      </BottomBar>
     </Screen>
   );
 }
