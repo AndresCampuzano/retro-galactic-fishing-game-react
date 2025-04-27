@@ -33,6 +33,20 @@ function App() {
   const { height, width, isMobile } = useWindowDimensions();
 
   const calculatedMaxHeight = height * 0.8 - 60; // Calculate the max height of the floating window
+  const [windowHeight, setWindowHeight] = useState<string | number>(
+    calculatedMaxHeight,
+  );
+
+  /**
+   * Resizing the floating windows when the screen size changes
+   */
+  useEffect(() => {
+    if (isMobile) {
+      setWindowHeight("100%");
+    } else {
+      setWindowHeight(calculatedMaxHeight);
+    }
+  }, [isMobile, calculatedMaxHeight]);
 
   useEffect(() => {
     // Opening windows when page loads
@@ -124,7 +138,7 @@ function App() {
                 zIndex: getZIndex(UI_ELEMENTS.leaderboard.title),
                 width: isMobile ? width : width - 200,
                 maxWidth: 1000,
-                height: calculatedMaxHeight,
+                height: windowHeight,
               }}
             >
               <LeaderboardContent />
@@ -144,7 +158,7 @@ function App() {
                 zIndex: getZIndex(UI_ELEMENTS.gameMarket.title),
                 width: isMobile ? width : width - 200,
                 maxWidth: 1000,
-                height: calculatedMaxHeight,
+                height: windowHeight,
               }}
             >
               <GameMarketContent />
@@ -164,7 +178,7 @@ function App() {
                 zIndex: getZIndex(UI_ELEMENTS.aboutMe.title),
                 width: isMobile ? width : width - 200,
                 maxWidth: 1000,
-                height: calculatedMaxHeight,
+                height: windowHeight,
               }}
             >
               <AboutContent />

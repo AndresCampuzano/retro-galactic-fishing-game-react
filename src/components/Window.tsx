@@ -1,5 +1,15 @@
-import Draggable, { type ControlPosition } from "react-draggable";
-import { type CSSProperties, type ReactNode, useRef, useState } from "react";
+import Draggable, {
+  type ControlPosition,
+  type DraggableEventHandler,
+} from "react-draggable";
+import {
+  type CSSProperties,
+  type ReactNode,
+  useRef,
+  useState,
+  useEffect,
+} from "react";
+import { useWindowDimensions } from "../hooks/useWindowDimensions.ts";
 
 export const Window = ({
   children,
@@ -20,6 +30,8 @@ export const Window = ({
 }) => {
   const nodeRef = useRef<any>(null);
   const [enableDrag, setEnableDrag] = useState(true);
+  const [position, setPosition] = useState<ControlPosition | undefined>();
+  const { isMobile } = useWindowDimensions();
 
   const onMouseEnterFunction = () => {
     setEnableDrag(false);
@@ -27,11 +39,32 @@ export const Window = ({
   const onMouseLeaveFunction = () => {
     setEnableDrag(true);
   };
+
+  const onStart: DraggableEventHandler = (_e, data) => {
+    setPosition({ x: data.x, y: data.y });
+  };
+
+  const onDrag: DraggableEventHandler = (_e, data) => {
+    setPosition({ x: data.x, y: data.y });
+  };
+
+  /**
+   * Reset position to (0, 0) when the window is opened on mobile
+   */
+  useEffect(() => {
+    if (isMobile) {
+      setPosition({ x: 0, y: 0 });
+    }
+  }, [isMobile]);
+
   return (
     <Draggable
       nodeRef={nodeRef}
       disabled={enableDrag}
       defaultPosition={defaultPosition}
+      position={position}
+      onStart={onStart}
+      onDrag={onDrag}
     >
       <div
         ref={nodeRef}
