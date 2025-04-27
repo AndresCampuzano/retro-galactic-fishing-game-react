@@ -77,6 +77,7 @@ function App() {
    * Handle click on floating window to bring it to the front
    */
   const onClickOnAlreadyOpenedWindow = (windowTitle: string) => {
+    console.log("onClickOnAlreadyOpenedWindow");
     bringWindowToFront(windowTitle);
   };
 
@@ -139,10 +140,10 @@ function App() {
                   img={UI_ELEMENTS.leaderboard.img}
                   title={UI_ELEMENTS.leaderboard.title}
                   defaultPosition={
-                    isMobile ? { x: 20, y: 60 } : { x: 120, y: 50 }
+                    isMobile ? { x: 0, y: 0 } : { x: 120, y: 50 }
                   }
                   style={{
-                    width: isMobile ? width - 30 : width - 200,
+                    width: isMobile ? width : width - 200,
                     maxWidth: 1000,
                     height: calculatedMaxHeight,
                   }}
@@ -153,7 +154,7 @@ function App() {
             )}
 
           {openWindows.includes(UI_ELEMENTS.aboutMe.title) && showAboutMe && (
-            <div
+            <span
               style={{ zIndex: getZIndex(UI_ELEMENTS.aboutMe.title) }}
               onClick={() =>
                 onClickOnAlreadyOpenedWindow(UI_ELEMENTS.aboutMe.title)
@@ -165,18 +166,16 @@ function App() {
                 }
                 img={UI_ELEMENTS.aboutMe.img}
                 title={UI_ELEMENTS.aboutMe.title}
-                defaultPosition={
-                  isMobile ? { x: 20, y: 60 } : { x: 120, y: 50 }
-                }
+                defaultPosition={isMobile ? { x: 0, y: 0 } : { x: 120, y: 50 }}
                 style={{
-                  width: isMobile ? width - 30 : width - 200,
+                  width: isMobile ? width : width - 200,
                   maxWidth: 1000,
                   height: calculatedMaxHeight,
                 }}
               >
                 <AboutContent />
               </Window>
-            </div>
+            </span>
           )}
         </div>
       </div>
