@@ -3,8 +3,10 @@ import { BottomBar } from "./components/BottomBar.tsx";
 import { ItemDesktop } from "./components/ItemDesktop.tsx";
 import { useEffect, useState } from "react";
 import { StartMenu } from "./components/StartMenu.tsx";
-import { Leaderboard } from "./components/Leaderboard.tsx";
-import { SetAboutMe } from "./components/SetAboutMe.tsx";
+import { Window } from "./components/Window.tsx";
+import { useWindowDimensions } from "./hooks/useWindowDimensions.ts";
+import { AboutContent } from "./components/floating-windows-content/AboutContent.tsx";
+import { LeaderboardContent } from "./components/floating-windows-content/LeaderboardContent.tsx";
 
 const UI_ELEMENTS = {
   aboutMe: {
@@ -28,6 +30,11 @@ function App() {
   const [showStartMenu, setStartMenu] = useState<boolean>(false);
   // const [showCodeScreen, setShowCodeScreen] = useState<boolean>(true);
   const [openWindows, setOpenWindows] = useState<string[]>([]);
+
+  const { height, width, isMobile } = useWindowDimensions();
+
+  // Calculate 80% of the screen height and subtract 60px
+  const calculatedMaxHeight = height * 0.8 - 60;
 
   useEffect(() => {
     // Opening windows when page loads
@@ -99,6 +106,7 @@ function App() {
       <div className="mt-5 grid grid-cols-5 grid-rows-5 grid-flow-col gap-5">
         {/* Draggable Area */}
         <div className="absolute left-0 top-0 right-[1px] flex bottom-[60px] overflow-hidden">
+          {/* Icons */}
           <ItemDesktop
             handleOpenWindow={handleWindowAbout}
             isViewAlreadyEnabled={showAboutMe}
@@ -125,18 +133,28 @@ function App() {
             top={245}
             left={5}
           />
+          {/* Floating windows */}
           {openWindows.includes(UI_ELEMENTS.leaderboard.title) &&
             showLeaderboard && (
               <div
                 style={{ zIndex: getZIndex(UI_ELEMENTS.leaderboard.title) }}
                 onClick={() => handleWindowClick(UI_ELEMENTS.leaderboard.title)}
               >
-                <Leaderboard
-                  key={UI_ELEMENTS.leaderboard.title}
-                  iconImg={UI_ELEMENTS.leaderboard.img}
-                  title={UI_ELEMENTS.leaderboard.title}
+                <Window
                   handleCloseWindow={handleLeaderboard}
-                />
+                  img={UI_ELEMENTS.leaderboard.img}
+                  title={UI_ELEMENTS.leaderboard.title}
+                  defaultPosition={
+                    isMobile ? { x: 20, y: 60 } : { x: 120, y: 50 }
+                  }
+                  style={{
+                    width: isMobile ? width - 30 : width - 200,
+                    maxWidth: 1000,
+                    height: calculatedMaxHeight,
+                  }}
+                >
+                  <LeaderboardContent />
+                </Window>
               </div>
             )}
 
@@ -145,24 +163,23 @@ function App() {
               style={{ zIndex: getZIndex(UI_ELEMENTS.aboutMe.title) }}
               onClick={() => handleWindowClick(UI_ELEMENTS.aboutMe.title)}
             >
-              <SetAboutMe
-                key={UI_ELEMENTS.aboutMe.title}
-                iconImg={UI_ELEMENTS.aboutMe.img}
-                title={UI_ELEMENTS.aboutMe.title}
+              <Window
                 handleCloseWindow={handleWindowAbout}
-              />
+                img={UI_ELEMENTS.aboutMe.img}
+                title={UI_ELEMENTS.aboutMe.title}
+                defaultPosition={
+                  isMobile ? { x: 20, y: 60 } : { x: 120, y: 50 }
+                }
+                style={{
+                  width: isMobile ? width - 30 : width - 200,
+                  maxWidth: 1000,
+                  height: calculatedMaxHeight,
+                }}
+              >
+                <AboutContent />
+              </Window>
             </div>
           )}
-
-          {/*{openWindows.includes(UI_ELEMENTS.gameMarket.title) &&*/}
-          {/*  showGameMarket && (*/}
-          {/*    <div*/}
-          {/*      style={{ zIndex: getZIndex(UI_ELEMENTS.gameMarket.title) }}*/}
-          {/*      onClick={() => handleWindowClick(UI_ELEMENTS.gameMarket.title)}*/}
-          {/*    >*/}
-          {/*      /!* Game Market window component would go here *!/*/}
-          {/*    </div>*/}
-          {/*  )}*/}
         </div>
       </div>
       {showStartMenu && <StartMenu handleStartMenu={handleStartMenu} />}
