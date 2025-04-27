@@ -227,23 +227,6 @@ function App() {
           </PrimaryButton>
         )}
 
-        {openWindows.includes(UI_ELEMENTS.aboutMe.title) && (
-          <PrimaryButton
-            onClick={() =>
-              onClickOnAlreadyOpenedWindow(UI_ELEMENTS.aboutMe.title)
-            }
-          >
-            <img
-              src={UI_ELEMENTS.aboutMe.img}
-              alt={UI_ELEMENTS.aboutMe.title}
-              className="w-7 h-7 object-contain"
-            />
-            <p className="hidden sm:block leading-[0.8]">
-              {UI_ELEMENTS.aboutMe.title}
-            </p>
-          </PrimaryButton>
-        )}
-
         {openWindows.includes(UI_ELEMENTS.gameMarket.title) && (
           <PrimaryButton
             onClick={() =>
@@ -257,6 +240,23 @@ function App() {
             />
             <p className="hidden sm:block leading-[0.8]">
               {UI_ELEMENTS.gameMarket.title}
+            </p>
+          </PrimaryButton>
+        )}
+
+        {openWindows.includes(UI_ELEMENTS.aboutMe.title) && (
+          <PrimaryButton
+            onClick={() =>
+              onClickOnAlreadyOpenedWindow(UI_ELEMENTS.aboutMe.title)
+            }
+          >
+            <img
+              src={UI_ELEMENTS.aboutMe.img}
+              alt={UI_ELEMENTS.aboutMe.title}
+              className="w-7 h-7 object-contain"
+            />
+            <p className="hidden sm:block leading-[0.8]">
+              {UI_ELEMENTS.aboutMe.title}
             </p>
           </PrimaryButton>
         )}
