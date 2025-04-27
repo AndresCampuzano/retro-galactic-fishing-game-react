@@ -170,7 +170,11 @@ function App() {
       </div>
       {showStartMenu && <StartMenu onCloseStartMenu={handleStartMenu} />}
       <BottomBar handleStartMenu={handleStartMenu}>
-        <PrimaryButton>
+        <PrimaryButton
+          onClick={() =>
+            onClickOnAlreadyOpenedWindow(UI_ELEMENTS.aboutMe.title)
+          }
+        >
           <img
             src={UI_ELEMENTS.aboutMe.img}
             alt={UI_ELEMENTS.aboutMe.title}
@@ -178,7 +182,11 @@ function App() {
           />
           <p>{UI_ELEMENTS.aboutMe.title}</p>
         </PrimaryButton>
-        <PrimaryButton>
+        <PrimaryButton
+          onClick={() =>
+            onClickOnAlreadyOpenedWindow(UI_ELEMENTS.leaderboard.title)
+          }
+        >
           <img
             src={UI_ELEMENTS.leaderboard.img}
             alt={UI_ELEMENTS.leaderboard.title}
