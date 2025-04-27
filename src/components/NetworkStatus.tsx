@@ -25,14 +25,7 @@ export const NetworkStatus = () => {
       className="flex items-center gap-1 px-1 ml-2 cursor-default"
       title={isOnline ? "Connected to network" : "Offline mode"}
     >
-      <img
-        src={`/images/${isOnline ? "online.png" : "offline.png"}`}
-        alt={isOnline ? "Network connected" : "Network offline"}
-        width="40"
-        height="40"
-        className="mr-1"
-      />
-      <span className="text-lg">{isOnline ? "Online" : "Offline"}</span>
+      <span className="text-lg text-red-500">{!isOnline && "(Offline)"}</span>
     </div>
   );
 };
