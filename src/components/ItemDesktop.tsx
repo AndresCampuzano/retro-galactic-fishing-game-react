@@ -26,6 +26,8 @@ export const ItemDesktop = ({
         src={img}
         alt={title}
         style={{ width: imageSize, height: imageSize }}
+        draggable="false"
+        className="select-none"
       />
       <p className="text-center mt-2.5 text-[24px] leading-[0.8]">{title}</p>
     </div>

@@ -41,7 +41,7 @@ export const Window = ({
       >
         <div className="bg-[#c3c3c3] h-full">
           {/* Top bar */}
-          <div className="flex items-center px-[5px] h-[30px] bg-[#02007f] text-[#fafafa] tracking-[1px] cursor-move">
+          <div className="flex items-center px-[5px] h-[30px] bg-[#02007f] text-[#fafafa] tracking-[1px] cursor-move select-none">
             <div
               onMouseEnter={onMouseEnterFunction}
               onMouseLeave={onMouseLeaveFunction}
@@ -49,8 +49,14 @@ export const Window = ({
               onTouchEndCapture={onMouseLeaveFunction}
               className="flex flex-1 w-full items-center"
             >
-              <img src={img} alt={title} width={20} />
-              <h2>{title}</h2>
+              <img
+                src={img}
+                alt={title}
+                width={20}
+                draggable="false"
+                className="select-none"
+              />
+              <h2>{title}</h2> <h2>{title}</h2>
             </div>
             <div className="flex justify-center items-center">
               <button

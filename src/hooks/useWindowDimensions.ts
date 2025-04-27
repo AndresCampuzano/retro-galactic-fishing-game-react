@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 /**
  * Custom hook to get the window dimensions and check if the device is mobile.
@@ -10,7 +10,7 @@ export const useWindowDimensions = (): {
 } => {
   const hasWindow = typeof window !== "undefined";
 
-  function getWindowDimensions() {
+  const getWindowDimensions = useCallback(() => {
     const width = hasWindow ? window.innerWidth : 481;
     const height = hasWindow ? window.innerHeight : 667;
     return {
@@ -18,7 +18,7 @@ export const useWindowDimensions = (): {
       width,
       height,
     };
-  }
+  }, [hasWindow]);
 
   const [windowDimensions, setWindowDimensions] = useState(
     getWindowDimensions(),
@@ -33,7 +33,7 @@ export const useWindowDimensions = (): {
       window.addEventListener("resize", handleResize);
       return () => window.removeEventListener("resize", handleResize);
     }
-  }, [hasWindow]);
+  }, [getWindowDimensions, hasWindow]);
 
   return windowDimensions;
 };
