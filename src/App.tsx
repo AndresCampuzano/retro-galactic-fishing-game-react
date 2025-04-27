@@ -5,8 +5,9 @@ import { useEffect, useState } from "react";
 import { StartMenu } from "./components/StartMenu.tsx";
 import { Window } from "./components/Window.tsx";
 import { useWindowDimensions } from "./hooks/useWindowDimensions.ts";
-import { AboutContent } from "./components/floating-windows-content/AboutContent.tsx";
 import { LeaderboardContent } from "./components/floating-windows-content/LeaderboardContent.tsx";
+import { GameMarketContent } from "./components/floating-windows-content/GameMarketContent.tsx";
+import { AboutContent } from "./components/floating-windows-content/AboutContent.tsx";
 import { PrimaryButton } from "./components/PrimaryButton.tsx";
 
 const UI_ELEMENTS = {
@@ -101,24 +102,24 @@ function App() {
         <div className="absolute left-0 top-0 right-[1px] flex bottom-[60px] overflow-hidden">
           {/* Icons */}
           <ItemDesktop
-            onClick={() => onOpenWindow(UI_ELEMENTS.aboutMe.title)}
-            img={UI_ELEMENTS.aboutMe.img}
-            title={UI_ELEMENTS.aboutMe.title}
-            top={5}
-            left={5}
-          />
-          <ItemDesktop
             onClick={() => onOpenWindow(UI_ELEMENTS.leaderboard.title)}
             img={UI_ELEMENTS.leaderboard.img}
             title={UI_ELEMENTS.leaderboard.title}
-            imageSize={56}
-            top={120}
+            top={5}
             left={5}
           />
           <ItemDesktop
             onClick={() => onOpenWindow(UI_ELEMENTS.gameMarket.title)}
             img={UI_ELEMENTS.gameMarket.img}
             title={UI_ELEMENTS.gameMarket.title}
+            imageSize={56}
+            top={120}
+            left={5}
+          />
+          <ItemDesktop
+            onClick={() => onOpenWindow(UI_ELEMENTS.aboutMe.title)}
+            img={UI_ELEMENTS.aboutMe.img}
+            title={UI_ELEMENTS.aboutMe.title}
             imageSize={56}
             top={245}
             left={5}
@@ -147,6 +148,29 @@ function App() {
               </Window>
             )}
 
+          {openWindows.includes(UI_ELEMENTS.gameMarket.title) &&
+            showGameMarket && (
+              <Window
+                onClickWindow={() =>
+                  onClickOnAlreadyOpenedWindow(UI_ELEMENTS.gameMarket.title)
+                }
+                onCloseWindow={() =>
+                  onCloseWindow(UI_ELEMENTS.gameMarket.title)
+                }
+                img={UI_ELEMENTS.gameMarket.img}
+                title={UI_ELEMENTS.gameMarket.title}
+                defaultPosition={isMobile ? { x: 0, y: 0 } : { x: 120, y: 50 }}
+                style={{
+                  zIndex: getZIndex(UI_ELEMENTS.gameMarket.title),
+                  width: isMobile ? width : width - 200,
+                  maxWidth: 1000,
+                  height: calculatedMaxHeight,
+                }}
+              >
+                <GameMarketContent />
+              </Window>
+            )}
+
           {openWindows.includes(UI_ELEMENTS.aboutMe.title) && showAboutMe && (
             <Window
               onClickWindow={() =>
@@ -169,22 +193,15 @@ function App() {
         </div>
       </div>
       {showStartMenu && <StartMenu onCloseStartMenu={handleStartMenu} />}
-      <BottomBar handleStartMenu={handleStartMenu}>
-        {openWindows.includes(UI_ELEMENTS.aboutMe.title) && showAboutMe && (
-          <PrimaryButton
-            onClick={() =>
-              onClickOnAlreadyOpenedWindow(UI_ELEMENTS.aboutMe.title)
-            }
-          >
-            <img
-              src={UI_ELEMENTS.aboutMe.img}
-              alt={UI_ELEMENTS.aboutMe.title}
-              className="w-7 h-7"
-            />
-            <p>{UI_ELEMENTS.aboutMe.title}</p>
-          </PrimaryButton>
-        )}
-
+      <BottomBar>
+        <PrimaryButton onClick={handleStartMenu}>
+          <img
+            src="images/windows-logo.png"
+            alt="windows logo"
+            className="w-7 h-7 object-contain"
+          />
+          {!(isMobile && openWindows.length > 2) && <p>Start</p>}
+        </PrimaryButton>
         {openWindows.includes(UI_ELEMENTS.leaderboard.title) &&
           showLeaderboard && (
             <PrimaryButton
@@ -195,9 +212,40 @@ function App() {
               <img
                 src={UI_ELEMENTS.leaderboard.img}
                 alt={UI_ELEMENTS.leaderboard.title}
-                className="w-7 h-7"
+                className="w-7 h-7 object-contain"
               />
-              <p>{UI_ELEMENTS.leaderboard.title}</p>
+              <p className="hidden sm:block">{UI_ELEMENTS.leaderboard.title}</p>
+            </PrimaryButton>
+          )}
+
+        {openWindows.includes(UI_ELEMENTS.aboutMe.title) && showAboutMe && (
+          <PrimaryButton
+            onClick={() =>
+              onClickOnAlreadyOpenedWindow(UI_ELEMENTS.aboutMe.title)
+            }
+          >
+            <img
+              src={UI_ELEMENTS.aboutMe.img}
+              alt={UI_ELEMENTS.aboutMe.title}
+              className="w-7 h-7 object-contain"
+            />
+            <p className="hidden sm:block">{UI_ELEMENTS.aboutMe.title}</p>
+          </PrimaryButton>
+        )}
+
+        {openWindows.includes(UI_ELEMENTS.gameMarket.title) &&
+          showGameMarket && (
+            <PrimaryButton
+              onClick={() =>
+                onClickOnAlreadyOpenedWindow(UI_ELEMENTS.gameMarket.title)
+              }
+            >
+              <img
+                src={UI_ELEMENTS.gameMarket.img}
+                alt={UI_ELEMENTS.gameMarket.title}
+                className="w-7 h-7 object-contain"
+              />
+              <p className="hidden sm:block">{UI_ELEMENTS.gameMarket.title}</p>
             </PrimaryButton>
           )}
       </BottomBar>
