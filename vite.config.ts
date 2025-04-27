@@ -38,9 +38,6 @@ export default defineConfig({
       registerType: "autoUpdate",
       injectRegister: "auto",
       includeAssets: ["*.png", "*.svg"],
-      strategies: "injectManifest",
-      srcDir: "src",
-      filename: "sw.js",
       manifest: {
         name: "Retro Galactic Fishing Game",
         short_name: "RetroFishing",
@@ -71,9 +68,13 @@ export default defineConfig({
         ],
       },
       workbox: {
+        // Use generateSW strategy (default)
         globPatterns: ["**/*.{js,css,html}", "images/*.{png,jpg,svg}"],
+        // Don't fallback to offline.html, use the cached app instead
         navigateFallback: "index.html",
+        // Don't include API routes in fallback
         navigateFallbackDenylist: [/^\/api\//],
+        // Better caching strategies for different types of assets
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/api\..*\.com\/.*/i,
