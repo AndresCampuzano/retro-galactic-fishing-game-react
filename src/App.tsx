@@ -26,9 +26,6 @@ const UI_ELEMENTS = {
 };
 
 function App() {
-  const [showAboutMe, setAboutMe] = useState<boolean>(false);
-  const [showGameMarket, setGameMarket] = useState<boolean>(false);
-  const [showLeaderboard, setLeaderboard] = useState<boolean>(false);
   const [showStartMenu, setStartMenu] = useState<boolean>(false);
   // const [showCodeScreen, setShowCodeScreen] = useState<boolean>(true);
   const [openWindows, setOpenWindows] = useState<string[]>([]);
@@ -39,8 +36,7 @@ function App() {
 
   useEffect(() => {
     // Opening windows when page loads
-    setLeaderboard(true);
-    setOpenWindows((prev) => [...prev, UI_ELEMENTS.leaderboard.title]);
+    setOpenWindows([UI_ELEMENTS.leaderboard.title]);
   }, []);
 
   /**
@@ -54,24 +50,14 @@ function App() {
   };
 
   const onOpenWindow = (title: string) => {
-    if (title === UI_ELEMENTS.aboutMe.title) {
-      setAboutMe(true);
-    } else if (title === UI_ELEMENTS.leaderboard.title) {
-      setLeaderboard(true);
-    } else if (title === UI_ELEMENTS.gameMarket.title) {
-      setGameMarket(true);
+    if (!openWindows.includes(title)) {
+      setOpenWindows((prev) => [...prev, title]);
+    } else {
+      bringWindowToFront(title);
     }
-    bringWindowToFront(title);
   };
 
   const onCloseWindow = (title: string) => {
-    if (title === UI_ELEMENTS.aboutMe.title) {
-      setAboutMe(false);
-    } else if (title === UI_ELEMENTS.leaderboard.title) {
-      setLeaderboard(false);
-    } else if (title === UI_ELEMENTS.gameMarket.title) {
-      setGameMarket(false);
-    }
     setOpenWindows((prev) => prev.filter((w) => w !== title));
   };
 
@@ -125,53 +111,47 @@ function App() {
             left={5}
           />
           {/* Floating windows */}
-          {openWindows.includes(UI_ELEMENTS.leaderboard.title) &&
-            showLeaderboard && (
-              <Window
-                onClickWindow={() =>
-                  onClickOnAlreadyOpenedWindow(UI_ELEMENTS.leaderboard.title)
-                }
-                onCloseWindow={() =>
-                  onCloseWindow(UI_ELEMENTS.leaderboard.title)
-                }
-                img={UI_ELEMENTS.leaderboard.img}
-                title={UI_ELEMENTS.leaderboard.title}
-                defaultPosition={isMobile ? { x: 0, y: 0 } : { x: 120, y: 50 }}
-                style={{
-                  zIndex: getZIndex(UI_ELEMENTS.leaderboard.title),
-                  width: isMobile ? width : width - 200,
-                  maxWidth: 1000,
-                  height: calculatedMaxHeight,
-                }}
-              >
-                <LeaderboardContent />
-              </Window>
-            )}
+          {openWindows.includes(UI_ELEMENTS.leaderboard.title) && (
+            <Window
+              onClickWindow={() =>
+                onClickOnAlreadyOpenedWindow(UI_ELEMENTS.leaderboard.title)
+              }
+              onCloseWindow={() => onCloseWindow(UI_ELEMENTS.leaderboard.title)}
+              img={UI_ELEMENTS.leaderboard.img}
+              title={UI_ELEMENTS.leaderboard.title}
+              defaultPosition={isMobile ? { x: 0, y: 0 } : { x: 120, y: 50 }}
+              style={{
+                zIndex: getZIndex(UI_ELEMENTS.leaderboard.title),
+                width: isMobile ? width : width - 200,
+                maxWidth: 1000,
+                height: calculatedMaxHeight,
+              }}
+            >
+              <LeaderboardContent />
+            </Window>
+          )}
 
-          {openWindows.includes(UI_ELEMENTS.gameMarket.title) &&
-            showGameMarket && (
-              <Window
-                onClickWindow={() =>
-                  onClickOnAlreadyOpenedWindow(UI_ELEMENTS.gameMarket.title)
-                }
-                onCloseWindow={() =>
-                  onCloseWindow(UI_ELEMENTS.gameMarket.title)
-                }
-                img={UI_ELEMENTS.gameMarket.img}
-                title={UI_ELEMENTS.gameMarket.title}
-                defaultPosition={isMobile ? { x: 0, y: 0 } : { x: 120, y: 50 }}
-                style={{
-                  zIndex: getZIndex(UI_ELEMENTS.gameMarket.title),
-                  width: isMobile ? width : width - 200,
-                  maxWidth: 1000,
-                  height: calculatedMaxHeight,
-                }}
-              >
-                <GameMarketContent />
-              </Window>
-            )}
+          {openWindows.includes(UI_ELEMENTS.gameMarket.title) && (
+            <Window
+              onClickWindow={() =>
+                onClickOnAlreadyOpenedWindow(UI_ELEMENTS.gameMarket.title)
+              }
+              onCloseWindow={() => onCloseWindow(UI_ELEMENTS.gameMarket.title)}
+              img={UI_ELEMENTS.gameMarket.img}
+              title={UI_ELEMENTS.gameMarket.title}
+              defaultPosition={isMobile ? { x: 0, y: 0 } : { x: 120, y: 50 }}
+              style={{
+                zIndex: getZIndex(UI_ELEMENTS.gameMarket.title),
+                width: isMobile ? width : width - 200,
+                maxWidth: 1000,
+                height: calculatedMaxHeight,
+              }}
+            >
+              <GameMarketContent />
+            </Window>
+          )}
 
-          {openWindows.includes(UI_ELEMENTS.aboutMe.title) && showAboutMe && (
+          {openWindows.includes(UI_ELEMENTS.aboutMe.title) && (
             <Window
               onClickWindow={() =>
                 onClickOnAlreadyOpenedWindow(UI_ELEMENTS.aboutMe.title)
@@ -202,23 +182,22 @@ function App() {
           />
           {!(isMobile && openWindows.length > 2) && <p>Start</p>}
         </PrimaryButton>
-        {openWindows.includes(UI_ELEMENTS.leaderboard.title) &&
-          showLeaderboard && (
-            <PrimaryButton
-              onClick={() =>
-                onClickOnAlreadyOpenedWindow(UI_ELEMENTS.leaderboard.title)
-              }
-            >
-              <img
-                src={UI_ELEMENTS.leaderboard.img}
-                alt={UI_ELEMENTS.leaderboard.title}
-                className="w-7 h-7 object-contain"
-              />
-              <p className="hidden sm:block">{UI_ELEMENTS.leaderboard.title}</p>
-            </PrimaryButton>
-          )}
+        {openWindows.includes(UI_ELEMENTS.leaderboard.title) && (
+          <PrimaryButton
+            onClick={() =>
+              onClickOnAlreadyOpenedWindow(UI_ELEMENTS.leaderboard.title)
+            }
+          >
+            <img
+              src={UI_ELEMENTS.leaderboard.img}
+              alt={UI_ELEMENTS.leaderboard.title}
+              className="w-7 h-7 object-contain"
+            />
+            <p className="hidden sm:block">{UI_ELEMENTS.leaderboard.title}</p>
+          </PrimaryButton>
+        )}
 
-        {openWindows.includes(UI_ELEMENTS.aboutMe.title) && showAboutMe && (
+        {openWindows.includes(UI_ELEMENTS.aboutMe.title) && (
           <PrimaryButton
             onClick={() =>
               onClickOnAlreadyOpenedWindow(UI_ELEMENTS.aboutMe.title)
@@ -233,21 +212,20 @@ function App() {
           </PrimaryButton>
         )}
 
-        {openWindows.includes(UI_ELEMENTS.gameMarket.title) &&
-          showGameMarket && (
-            <PrimaryButton
-              onClick={() =>
-                onClickOnAlreadyOpenedWindow(UI_ELEMENTS.gameMarket.title)
-              }
-            >
-              <img
-                src={UI_ELEMENTS.gameMarket.img}
-                alt={UI_ELEMENTS.gameMarket.title}
-                className="w-7 h-7 object-contain"
-              />
-              <p className="hidden sm:block">{UI_ELEMENTS.gameMarket.title}</p>
-            </PrimaryButton>
-          )}
+        {openWindows.includes(UI_ELEMENTS.gameMarket.title) && (
+          <PrimaryButton
+            onClick={() =>
+              onClickOnAlreadyOpenedWindow(UI_ELEMENTS.gameMarket.title)
+            }
+          >
+            <img
+              src={UI_ELEMENTS.gameMarket.img}
+              alt={UI_ELEMENTS.gameMarket.title}
+              className="w-7 h-7 object-contain"
+            />
+            <p className="hidden sm:block">{UI_ELEMENTS.gameMarket.title}</p>
+          </PrimaryButton>
+        )}
       </BottomBar>
     </Screen>
   );
