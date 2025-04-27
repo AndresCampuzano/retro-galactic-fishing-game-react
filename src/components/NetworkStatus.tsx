@@ -20,14 +20,15 @@ export const NetworkStatus = () => {
     };
   }, []);
 
-  return (
+  return isOnline ? null : (
     <div
-      className="flex items-center gap-1 px-1cursor-default"
-      title={isOnline ? "Connected to network" : "Offline mode"}
+      className="flex items-center gap-1 px-1"
+      title="Offline mode"
+      style={{
+        backgroundColor: "#ff0000",
+      }}
     >
-      <span className="text-lg text-red-500 font-bold">
-        {!isOnline && "(Offline)"}
-      </span>
+      <span className="text-lg text-white font-bold">Offline</span>
     </div>
   );
 };

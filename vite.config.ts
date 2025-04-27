@@ -38,6 +38,9 @@ export default defineConfig({
       registerType: "autoUpdate",
       injectRegister: "auto",
       includeAssets: ["*.png", "*.svg"],
+      strategies: "injectManifest",
+      srcDir: "src",
+      filename: "sw.js",
       manifest: {
         name: "Retro Galactic Fishing Game",
         short_name: "RetroFishing",
@@ -69,6 +72,8 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ["**/*.{js,css,html}", "images/*.{png,jpg,svg}"],
+        navigateFallback: "index.html",
+        navigateFallbackDenylist: [/^\/api\//],
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/api\..*\.com\/.*/i,
@@ -80,6 +85,24 @@ export default defineConfig({
                 maxAgeSeconds: 60 * 60 * 24 * 7, // 1 week
               },
               networkTimeoutSeconds: 10,
+            },
+          },
+          {
+            urlPattern: /\.(?:js|css|html)$/,
+            handler: "StaleWhileRevalidate",
+            options: {
+              cacheName: "assets-cache",
+            },
+          },
+          {
+            urlPattern: /\.(?:png|jpg|jpeg|svg|gif)$/,
+            handler: "CacheFirst",
+            options: {
+              cacheName: "images-cache",
+              expiration: {
+                maxEntries: 60,
+                maxAgeSeconds: 60 * 60 * 24 * 30, // 30 days
+              },
             },
           },
         ],
