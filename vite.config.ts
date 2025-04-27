@@ -46,17 +46,17 @@ export default defineConfig({
         theme_color: "#008080",
         icons: [
           {
-            src: "public/images/windows-logo.png",
+            src: "/images/windows-logo.png",
             sizes: "192x192",
             type: "image/png",
           },
           {
-            src: "public/images/windows-logo.png",
+            src: "/images/windows-logo.png",
             sizes: "512x512",
             type: "image/png",
           },
           {
-            src: "public/images/windows-logo.png",
+            src: "/images/windows-logo.png",
             sizes: "512x512",
             type: "image/png",
             purpose: "any maskable",
