@@ -9,3 +9,11 @@ type GameLeaderboard = {
   xp: number;
   gold: number;
 };
+
+type GameMarket = {
+  id: string;
+  name: string;
+  type: string;
+  description: string;
+  cost: number;
+};

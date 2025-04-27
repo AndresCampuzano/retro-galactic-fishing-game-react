@@ -11,7 +11,7 @@ import { AboutContent } from "./components/floating-windows-content/AboutContent
 import { PrimaryButton } from "./components/PrimaryButton.tsx";
 import { InitialScreen } from "./components/InitialScreen.tsx";
 import { useFetch } from "./hooks/useFetch.ts";
-import { fetchGameLeaderboard } from "./api/game.service.ts";
+import { fetchGameLeaderboard, fetchGameMarket } from "./api/game.service.ts";
 
 const UI_ELEMENTS = {
   aboutMe: {
@@ -38,15 +38,33 @@ function App() {
     calculatedMaxHeight,
   );
 
-  const { data, error, loading } = useFetch(fetchGameLeaderboard, true);
+  const {
+    data: leaderboardData,
+    error: leaderboardError,
+    loading: leaderboardLoading,
+  } = useFetch(fetchGameLeaderboard, true);
+
+  const {
+    data: gameMarketData,
+    error: gameMarketError,
+    loading: gameMarketLoading,
+  } = useFetch(fetchGameMarket, true);
 
   useEffect(() => {
     console.log({
-      data,
-      error,
-      loading,
+      leaderboardData,
+      leaderboardError,
+      leaderboardLoading,
     });
-  }, [data, error, loading]);
+  }, [leaderboardData, leaderboardError, leaderboardLoading]);
+
+  useEffect(() => {
+    console.log({
+      gameMarketData,
+      gameMarketError,
+      gameMarketLoading,
+    });
+  }, [gameMarketData, gameMarketError, gameMarketLoading]);
 
   // Showing initial screen for 3.5 seconds when the page loads
   useEffect(() => {

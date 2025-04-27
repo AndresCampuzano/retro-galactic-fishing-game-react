@@ -7,3 +7,9 @@ export function fetchGameLeaderboard(): Promise<GameLeaderboard[]> {
     method: "GET",
   });
 }
+
+export function fetchGameMarket(): Promise<GameMarket[]> {
+  return fetchFromService<GameMarket[]>(BASE_URL, "/game/market", {
+    method: "GET",
+  });
+}
