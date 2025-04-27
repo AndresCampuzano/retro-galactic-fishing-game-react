@@ -77,7 +77,7 @@ function App() {
    * Handle click on floating window to bring it to the front
    */
   const onClickOnAlreadyOpenedWindow = (windowTitle: string) => {
-    console.log("onClickOnAlreadyOpenedWindow");
+    console.log("onClickOnAlreadyOpenedWindow ", windowTitle);
     bringWindowToFront(windowTitle);
   };
 
@@ -127,55 +127,45 @@ function App() {
           {/* Floating windows */}
           {openWindows.includes(UI_ELEMENTS.leaderboard.title) &&
             showLeaderboard && (
-              <div
-                style={{ zIndex: getZIndex(UI_ELEMENTS.leaderboard.title) }}
-                onClick={() =>
+              <Window
+                onClickWindow={() =>
                   onClickOnAlreadyOpenedWindow(UI_ELEMENTS.leaderboard.title)
                 }
-              >
-                <Window
-                  handleCloseWindow={() =>
-                    onCloseWindow(UI_ELEMENTS.leaderboard.title)
-                  }
-                  img={UI_ELEMENTS.leaderboard.img}
-                  title={UI_ELEMENTS.leaderboard.title}
-                  defaultPosition={
-                    isMobile ? { x: 0, y: 0 } : { x: 120, y: 50 }
-                  }
-                  style={{
-                    width: isMobile ? width : width - 200,
-                    maxWidth: 1000,
-                    height: calculatedMaxHeight,
-                  }}
-                >
-                  <LeaderboardContent />
-                </Window>
-              </div>
-            )}
-
-          {openWindows.includes(UI_ELEMENTS.aboutMe.title) && showAboutMe && (
-            <span
-              style={{ zIndex: getZIndex(UI_ELEMENTS.aboutMe.title) }}
-              onClick={() =>
-                onClickOnAlreadyOpenedWindow(UI_ELEMENTS.aboutMe.title)
-              }
-            >
-              <Window
-                handleCloseWindow={() =>
-                  onCloseWindow(UI_ELEMENTS.aboutMe.title)
+                onCloseWindow={() =>
+                  onCloseWindow(UI_ELEMENTS.leaderboard.title)
                 }
-                img={UI_ELEMENTS.aboutMe.img}
-                title={UI_ELEMENTS.aboutMe.title}
+                img={UI_ELEMENTS.leaderboard.img}
+                title={UI_ELEMENTS.leaderboard.title}
                 defaultPosition={isMobile ? { x: 0, y: 0 } : { x: 120, y: 50 }}
                 style={{
+                  zIndex: getZIndex(UI_ELEMENTS.leaderboard.title),
                   width: isMobile ? width : width - 200,
                   maxWidth: 1000,
                   height: calculatedMaxHeight,
                 }}
               >
-                <AboutContent />
+                <LeaderboardContent />
               </Window>
-            </span>
+            )}
+
+          {openWindows.includes(UI_ELEMENTS.aboutMe.title) && showAboutMe && (
+            <Window
+              onClickWindow={() =>
+                onClickOnAlreadyOpenedWindow(UI_ELEMENTS.aboutMe.title)
+              }
+              onCloseWindow={() => onCloseWindow(UI_ELEMENTS.aboutMe.title)}
+              img={UI_ELEMENTS.aboutMe.img}
+              title={UI_ELEMENTS.aboutMe.title}
+              defaultPosition={isMobile ? { x: 0, y: 0 } : { x: 120, y: 50 }}
+              style={{
+                zIndex: getZIndex(UI_ELEMENTS.aboutMe.title),
+                width: isMobile ? width : width - 200,
+                maxWidth: 1000,
+                height: calculatedMaxHeight,
+              }}
+            >
+              <AboutContent />
+            </Window>
           )}
         </div>
       </div>

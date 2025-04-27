@@ -5,14 +5,16 @@ export const Window = ({
   children,
   title,
   img,
-  handleCloseWindow,
+  onCloseWindow,
+  onClickWindow,
   style,
   defaultPosition,
 }: {
   children: ReactNode;
   title: string;
   img: string;
-  handleCloseWindow: () => void;
+  onCloseWindow: () => void;
+  onClickWindow: () => void;
   style?: CSSProperties | undefined;
   defaultPosition?: ControlPosition;
 }) => {
@@ -33,6 +35,7 @@ export const Window = ({
     >
       <div
         ref={nodeRef}
+        onClick={onClickWindow}
         style={style}
         className="absolute bg-[#969696] p-[1px] border-t-[2.5px] border-t-white border-l-[2.5px] border-l-white border-r-[2.5px] border-r-black border-b-[2.5px] border-b-black"
       >
@@ -52,7 +55,7 @@ export const Window = ({
             <div className="flex justify-center items-center">
               <button
                 type="button"
-                onClick={handleCloseWindow}
+                onClick={onCloseWindow}
                 className="flex justify-center items-center p-[2px] h-[23px] w-[23px] bg-[#c3c3c3] border-t-[2.5px] border-l-[2.5px] border-l-white border-t-white border-r-[2.5px] border-r-black border-b-[2.5px] border-b-black cursor-pointer font-[VT323] text-[20px]"
               >
                 <img src="images/close-icon.png" alt="close" width={10} />
@@ -60,7 +63,7 @@ export const Window = ({
             </div>
           </div>
           {/* Content */}
-          <div className="h-[calc(100%-35px)] m-[2px] p-[10px] bg-[#fafafa] border-t-[2.5px] border-t-[#545454] border-l-[2.5px] border-l-[#545454] border-r-[2.5px] border-r-[#ffffff] border-b-[2.5px] border-b-[#ffffff] overflow-scroll overscroll-auto">
+          <div className="h-[calc(100%-34px)] m-[2px] p-[10px] bg-[#fafafa] border-t-[2.5px] border-t-[#545454] border-l-[2.5px] border-l-[#545454] border-r-[2.5px] border-r-[#ffffff] border-b-[2.5px] border-b-[#ffffff] overflow-scroll overscroll-auto">
             {children}
           </div>
         </div>
