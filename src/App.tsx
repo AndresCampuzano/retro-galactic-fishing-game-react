@@ -35,34 +35,62 @@ function App() {
     setOpenWindows((prev) => [...prev, UI_ELEMENTS.leaderboard.title]);
   }, []);
 
-  const handleWindowAbout = () => {
-    setAboutMe((prev) => !prev);
+  const bringWindowToFront = (windowTitle: string) => {
     setOpenWindows((prev) => {
-      const newWindows = prev.filter((w) => w !== UI_ELEMENTS.aboutMe.title);
-      return [...newWindows, UI_ELEMENTS.aboutMe.title];
+      const newWindows = prev.filter((w) => w !== windowTitle);
+      return [...newWindows, windowTitle];
     });
+  };
+
+  const handleWindowAbout = () => {
+    if (!showAboutMe) {
+      setAboutMe(true);
+      bringWindowToFront(UI_ELEMENTS.aboutMe.title);
+    } else {
+      setAboutMe(false);
+      setOpenWindows((prev) =>
+        prev.filter((w) => w !== UI_ELEMENTS.aboutMe.title),
+      );
+    }
   };
 
   const handleLeaderboard = () => {
-    setLeaderboard((prev) => !prev);
-    setOpenWindows((prev) => {
-      const newWindows = prev.filter(
-        (w) => w !== UI_ELEMENTS.leaderboard.title,
+    if (!showLeaderboard) {
+      setLeaderboard(true);
+      bringWindowToFront(UI_ELEMENTS.leaderboard.title);
+    } else {
+      setLeaderboard(false);
+      setOpenWindows((prev) =>
+        prev.filter((w) => w !== UI_ELEMENTS.leaderboard.title),
       );
-      return [...newWindows, UI_ELEMENTS.leaderboard.title];
-    });
+    }
   };
 
   const handleWindowRecycle = () => {
-    setGameMarket((prev) => !prev);
-    setOpenWindows((prev) => {
-      const newWindows = prev.filter((w) => w !== UI_ELEMENTS.gameMarket.title);
-      return [...newWindows, UI_ELEMENTS.gameMarket.title];
-    });
+    if (!showGameMarket) {
+      setGameMarket(true);
+      bringWindowToFront(UI_ELEMENTS.gameMarket.title);
+    } else {
+      setGameMarket(false);
+      setOpenWindows((prev) =>
+        prev.filter((w) => w !== UI_ELEMENTS.gameMarket.title),
+      );
+    }
+  };
+
+  const handleWindowClick = (windowTitle: string) => {
+    bringWindowToFront(windowTitle);
   };
 
   const handleStartMenu = () => {
     setStartMenu((prev) => !prev);
+  };
+
+  // Determine z-index for each window based on order in openWindows array
+  const getZIndex = (windowTitle: string) => {
+    const index = openWindows.indexOf(windowTitle);
+    if (index === -1) return 0;
+    return index + 1; // Higher index = higher z-index = appears on top
   };
 
   return (
@@ -99,22 +127,42 @@ function App() {
           />
           {openWindows.includes(UI_ELEMENTS.leaderboard.title) &&
             showLeaderboard && (
-              <Leaderboard
-                key={UI_ELEMENTS.leaderboard.title}
-                iconImg={UI_ELEMENTS.leaderboard.img}
-                title={UI_ELEMENTS.leaderboard.title}
-                handleCloseWindow={handleLeaderboard}
-              />
+              <div
+                style={{ zIndex: getZIndex(UI_ELEMENTS.leaderboard.title) }}
+                onClick={() => handleWindowClick(UI_ELEMENTS.leaderboard.title)}
+              >
+                <Leaderboard
+                  key={UI_ELEMENTS.leaderboard.title}
+                  iconImg={UI_ELEMENTS.leaderboard.img}
+                  title={UI_ELEMENTS.leaderboard.title}
+                  handleCloseWindow={handleLeaderboard}
+                />
+              </div>
             )}
 
           {openWindows.includes(UI_ELEMENTS.aboutMe.title) && showAboutMe && (
-            <SetAboutMe
-              key={UI_ELEMENTS.aboutMe.title}
-              iconImg={UI_ELEMENTS.aboutMe.img}
-              title={UI_ELEMENTS.aboutMe.title}
-              handleCloseWindow={handleWindowAbout}
-            />
+            <div
+              style={{ zIndex: getZIndex(UI_ELEMENTS.aboutMe.title) }}
+              onClick={() => handleWindowClick(UI_ELEMENTS.aboutMe.title)}
+            >
+              <SetAboutMe
+                key={UI_ELEMENTS.aboutMe.title}
+                iconImg={UI_ELEMENTS.aboutMe.img}
+                title={UI_ELEMENTS.aboutMe.title}
+                handleCloseWindow={handleWindowAbout}
+              />
+            </div>
           )}
+
+          {/*{openWindows.includes(UI_ELEMENTS.gameMarket.title) &&*/}
+          {/*  showGameMarket && (*/}
+          {/*    <div*/}
+          {/*      style={{ zIndex: getZIndex(UI_ELEMENTS.gameMarket.title) }}*/}
+          {/*      onClick={() => handleWindowClick(UI_ELEMENTS.gameMarket.title)}*/}
+          {/*    >*/}
+          {/*      /!* Game Market window component would go here *!/*/}
+          {/*    </div>*/}
+          {/*  )}*/}
         </div>
       </div>
       {showStartMenu && <StartMenu handleStartMenu={handleStartMenu} />}
