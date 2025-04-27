@@ -38,7 +38,7 @@ function App() {
     calculatedMaxHeight,
   );
 
-  // Showing initial screen when the page loads
+  // Showing initial screen for 3.5 seconds when the page loads
   useEffect(() => {
     setTimeout(() => {
       setShowInitialScreen(false);
