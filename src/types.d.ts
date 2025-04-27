@@ -1,19 +1,23 @@
-type RequestInitExtended = RequestInit & {
+interface RequestInitExtended extends RequestInit {
   params?: Record<string, number | Date | string>;
-};
+}
 
-type GameLeaderboard = {
+interface User {
   rank: number;
   username: string;
   level: number;
   xp: number;
   gold: number;
-};
+}
 
-type GameMarket = {
+interface GameLeaderboard {
+  players: User[];
+}
+
+interface GameMarket {
   id: string;
   name: string;
   type: string;
   description: string;
   cost: number;
-};
+}

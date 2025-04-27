@@ -182,7 +182,11 @@ function App() {
                 height: windowHeight,
               }}
             >
-              <LeaderboardContent />
+              <LeaderboardContent
+                data={leaderboardData}
+                loading={leaderboardLoading}
+                error={leaderboardError}
+              />
             </Window>
           )}
 
