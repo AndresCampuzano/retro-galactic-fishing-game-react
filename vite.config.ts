@@ -37,7 +37,7 @@ export default defineConfig({
     VitePWA({
       registerType: "autoUpdate",
       injectRegister: "auto",
-      includeAssets: ["*.ico", "*.png", "*.svg", "windows_icon.ico"],
+      includeAssets: ["*.png", "*.svg"],
       manifest: {
         name: "Retro Galactic Fishing Game",
         short_name: "RetroFishing",
@@ -46,20 +46,24 @@ export default defineConfig({
         theme_color: "#008080",
         icons: [
           {
-            src: "/windows_icon.ico",
-            sizes: "16x16 32x32 48x48",
-            type: "image/x-icon"
+            src: "/images/logo16.png",
+            sizes: "16x16",
+            type: "image/png",
           },
           {
-            src: "/windows_icon.ico",
-            sizes: "any",
-            type: "image/x-icon",
-            purpose: "any maskable"
-          }
+            src: "/images/logo32.png",
+            sizes: "32x32",
+            type: "image/png",
+          },
+          {
+            src: "/images/logo48.png",
+            sizes: "48x48",
+            type: "image/png",
+          },
         ],
       },
       workbox: {
-        globPatterns: ["**/*.{js,css,html,ico}", "images/*.{png,jpg,svg}"],
+        globPatterns: ["**/*.{js,css,html}", "images/*.{png,jpg,svg}"],
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/api\..*\.com\/.*/i,

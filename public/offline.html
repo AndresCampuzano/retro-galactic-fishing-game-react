@@ -1,81 +1,90 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Offline - Retro Galactic Fishing Game</title>
-  <style>
-    body {
-      background-color: #008080;
-      font-family: 'MS Sans Serif', Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
-    .window {
-      background-color: #c0c0c0;
-      border: 3px solid #dfdfdf;
-      border-right-color: #7c7c7c;
-      border-bottom-color: #7c7c7c;
-      padding: 2px;
-      box-shadow: 0 0 0 1px #000;
-      width: 400px;
-    }
-    .title-bar {
-      background-color: #000080;
-      color: white;
-      font-weight: bold;
-      padding: 2px 4px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .content {
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 16px;
-    }
-    .button {
-      background-color: #c0c0c0;
-      border: 2px solid #dfdfdf;
-      border-right-color: #7c7c7c;
-      border-bottom-color: #7c7c7c;
-      padding: 4px 12px;
-      cursor: pointer;
-      font-family: 'MS Sans Serif', Arial, sans-serif;
-    }
-    .button:active {
-      border: 2px solid #7c7c7c;
-      border-right-color: #dfdfdf;
-      border-bottom-color: #dfdfdf;
-    }
-    img {
-      image-rendering: pixelated;
-    }
-  </style>
-</head>
-<body>
-  <div class="window">
-    <div class="title-bar">
-      <span>Network Error</span>
-      <span>X</span>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Offline - Retro Galactic Fishing Game</title>
+    <style>
+      body {
+        background-color: #008080;
+        font-family: "MS Sans Serif", Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      .window {
+        background-color: #c0c0c0;
+        border: 3px solid #dfdfdf;
+        border-right-color: #7c7c7c;
+        border-bottom-color: #7c7c7c;
+        padding: 2px;
+        box-shadow: 0 0 0 1px #000;
+        width: 400px;
+      }
+      .title-bar {
+        background-color: #000080;
+        color: white;
+        font-weight: bold;
+        padding: 2px 4px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .content {
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+      }
+      .button {
+        background-color: #c0c0c0;
+        border: 2px solid #dfdfdf;
+        border-right-color: #7c7c7c;
+        border-bottom-color: #7c7c7c;
+        padding: 4px 12px;
+        cursor: pointer;
+        font-family: "MS Sans Serif", Arial, sans-serif;
+      }
+      .button:active {
+        border: 2px solid #7c7c7c;
+        border-right-color: #dfdfdf;
+        border-bottom-color: #dfdfdf;
+      }
+      img {
+        image-rendering: pixelated;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="window">
+      <div class="title-bar">
+        <span>Network Error</span>
+        <span>X</span>
+      </div>
+      <div class="content">
+        <img
+          src="/images/windows-logo.png"
+          alt="Windows 95 Logo"
+          width="60px"
+        />
+        <p>You are currently offline. Some features may not be available.</p>
+        <p>
+          The Retro Galactic Fishing Game will load from cache if you have
+          visited before.
+        </p>
+        <button class="button" onclick="window.location.reload()">
+          Try Again
+        </button>
+      </div>
     </div>
-    <div class="content">
-      <img src="/windows_icon.ico" alt="Windows 95 Logo" width="60px">
-      <p>You are currently offline. Some features may not be available.</p>
-      <p>The Retro Galactic Fishing Game will load from cache if you have visited before.</p>
-      <button class="button" onclick="window.location.reload()">Try Again</button>
-    </div>
-  </div>
-  <script>
-    // Check if we're back online
-    window.addEventListener('online', () => {
-      window.location.reload();
-    });
-  </script>
-</body>
+    <script>
+      // Check if we're back online
+      window.addEventListener("online", () => {
+        window.location.reload();
+      });
+    </script>
+  </body>
 </html>
