@@ -170,30 +170,36 @@ function App() {
       </div>
       {showStartMenu && <StartMenu onCloseStartMenu={handleStartMenu} />}
       <BottomBar handleStartMenu={handleStartMenu}>
-        <PrimaryButton
-          onClick={() =>
-            onClickOnAlreadyOpenedWindow(UI_ELEMENTS.aboutMe.title)
-          }
-        >
-          <img
-            src={UI_ELEMENTS.aboutMe.img}
-            alt={UI_ELEMENTS.aboutMe.title}
-            className="w-7 h-7"
-          />
-          <p>{UI_ELEMENTS.aboutMe.title}</p>
-        </PrimaryButton>
-        <PrimaryButton
-          onClick={() =>
-            onClickOnAlreadyOpenedWindow(UI_ELEMENTS.leaderboard.title)
-          }
-        >
-          <img
-            src={UI_ELEMENTS.leaderboard.img}
-            alt={UI_ELEMENTS.leaderboard.title}
-            className="w-7 h-7"
-          />
-          <p>{UI_ELEMENTS.leaderboard.title}</p>
-        </PrimaryButton>
+        {openWindows.includes(UI_ELEMENTS.aboutMe.title) && showAboutMe && (
+          <PrimaryButton
+            onClick={() =>
+              onClickOnAlreadyOpenedWindow(UI_ELEMENTS.aboutMe.title)
+            }
+          >
+            <img
+              src={UI_ELEMENTS.aboutMe.img}
+              alt={UI_ELEMENTS.aboutMe.title}
+              className="w-7 h-7"
+            />
+            <p>{UI_ELEMENTS.aboutMe.title}</p>
+          </PrimaryButton>
+        )}
+
+        {openWindows.includes(UI_ELEMENTS.leaderboard.title) &&
+          showLeaderboard && (
+            <PrimaryButton
+              onClick={() =>
+                onClickOnAlreadyOpenedWindow(UI_ELEMENTS.leaderboard.title)
+              }
+            >
+              <img
+                src={UI_ELEMENTS.leaderboard.img}
+                alt={UI_ELEMENTS.leaderboard.title}
+                className="w-7 h-7"
+              />
+              <p>{UI_ELEMENTS.leaderboard.title}</p>
+            </PrimaryButton>
+          )}
       </BottomBar>
     </Screen>
   );
