@@ -54,9 +54,9 @@ export const Window = ({
                 alt={title}
                 width={20}
                 draggable="false"
-                className="select-none"
+                className="select-none mr-1"
               />
-              <h2>{title}</h2> <h2>{title}</h2>
+              <h2>{title}</h2>
             </div>
             <div className="flex justify-center items-center">
               <button
