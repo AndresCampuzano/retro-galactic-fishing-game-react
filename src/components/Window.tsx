@@ -35,7 +35,7 @@ export const Window = ({
     >
       <div
         ref={nodeRef}
-        onClick={onClickWindow}
+        onPointerDown={onClickWindow}
         style={style}
         className="absolute bg-[#969696] p-[1px] border-t-[2.5px] border-t-white border-l-[2.5px] border-l-white border-r-[2.5px] border-r-black border-b-[2.5px] border-b-black"
       >
