@@ -209,6 +209,7 @@ function App() {
           />
           {!(isMobile && openWindows.length > 2) && <p>Start</p>}
         </PrimaryButton>
+
         {openWindows.includes(UI_ELEMENTS.leaderboard.title) && (
           <PrimaryButton
             onClick={() =>
