@@ -41,3 +41,22 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: #a9a9a9;
 }
+
+.initial-screen {
+  background-color: #212121;
+  height: 100vh;
+
+  span {
+    color: #fafafa;
+    font-size: 1.5rem;
+  }
+
+  .blinker {
+    opacity: 1;
+    margin-bottom: -2px;
+    height: 15px;
+    margin-left: -5px;
+    border-left: 7px solid #fafafa;
+    animation: blinker 0.6s steps(2, start) infinite;
+  }
+}

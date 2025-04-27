@@ -9,6 +9,7 @@ import { LeaderboardContent } from "./components/floating-windows-content/Leader
 import { GameMarketContent } from "./components/floating-windows-content/GameMarketContent.tsx";
 import { AboutContent } from "./components/floating-windows-content/AboutContent.tsx";
 import { PrimaryButton } from "./components/PrimaryButton.tsx";
+import { InitialScreen } from "./components/InitialScreen.tsx";
 
 const UI_ELEMENTS = {
   aboutMe: {
@@ -27,7 +28,7 @@ const UI_ELEMENTS = {
 
 function App() {
   const [showStartMenu, setStartMenu] = useState<boolean>(false);
-  // const [showCodeScreen, setShowCodeScreen] = useState<boolean>(true);
+  const [showInitialScreen, setShowInitialScreen] = useState<boolean>(true);
   const [openWindows, setOpenWindows] = useState<string[]>([]);
 
   const { height, width, isMobile } = useWindowDimensions();
@@ -36,6 +37,13 @@ function App() {
   const [windowHeight, setWindowHeight] = useState<string | number>(
     calculatedMaxHeight,
   );
+
+  // Showing initial screen when the page loads
+  useEffect(() => {
+    setTimeout(() => {
+      setShowInitialScreen(false);
+    }, 3500);
+  }, []);
 
   /**
    * Resizing the floating windows when the screen size changes
@@ -94,6 +102,11 @@ function App() {
   const handleStartMenu = () => {
     setStartMenu((prev) => !prev);
   };
+
+  if (showInitialScreen) {
+    return <InitialScreen />;
+  }
+
   return (
     <Screen>
       {/* Items Desktop Grid */}
