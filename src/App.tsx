@@ -51,43 +51,32 @@ function App() {
     });
   };
 
-  const handleWindowAbout = () => {
-    if (!showAboutMe) {
+  const onOpenWindow = (title: string) => {
+    if (title === UI_ELEMENTS.aboutMe.title) {
       setAboutMe(true);
-      bringWindowToFront(UI_ELEMENTS.aboutMe.title);
-    } else {
-      setAboutMe(false);
-      setOpenWindows((prev) =>
-        prev.filter((w) => w !== UI_ELEMENTS.aboutMe.title),
-      );
-    }
-  };
-
-  const handleLeaderboard = () => {
-    if (!showLeaderboard) {
+    } else if (title === UI_ELEMENTS.leaderboard.title) {
       setLeaderboard(true);
-      bringWindowToFront(UI_ELEMENTS.leaderboard.title);
-    } else {
-      setLeaderboard(false);
-      setOpenWindows((prev) =>
-        prev.filter((w) => w !== UI_ELEMENTS.leaderboard.title),
-      );
-    }
-  };
-
-  const handleWindowRecycle = () => {
-    if (!showGameMarket) {
+    } else if (title === UI_ELEMENTS.gameMarket.title) {
       setGameMarket(true);
-      bringWindowToFront(UI_ELEMENTS.gameMarket.title);
-    } else {
-      setGameMarket(false);
-      setOpenWindows((prev) =>
-        prev.filter((w) => w !== UI_ELEMENTS.gameMarket.title),
-      );
     }
+    bringWindowToFront(title);
   };
 
-  const handleWindowClick = (windowTitle: string) => {
+  const onCloseWindow = (title: string) => {
+    if (title === UI_ELEMENTS.aboutMe.title) {
+      setAboutMe(false);
+    } else if (title === UI_ELEMENTS.leaderboard.title) {
+      setLeaderboard(false);
+    } else if (title === UI_ELEMENTS.gameMarket.title) {
+      setGameMarket(false);
+    }
+    setOpenWindows((prev) => prev.filter((w) => w !== title));
+  };
+
+  /**
+   * Handle click on floating window to bring it to the front
+   */
+  const onClickOnAlreadyOpenedWindow = (windowTitle: string) => {
     bringWindowToFront(windowTitle);
   };
 
@@ -112,16 +101,14 @@ function App() {
         <div className="absolute left-0 top-0 right-[1px] flex bottom-[60px] overflow-hidden">
           {/* Icons */}
           <ItemDesktop
-            handleOpenWindow={handleWindowAbout}
-            isViewAlreadyEnabled={showAboutMe}
+            onClick={() => onOpenWindow(UI_ELEMENTS.aboutMe.title)}
             img={UI_ELEMENTS.aboutMe.img}
             title={UI_ELEMENTS.aboutMe.title}
             top={5}
             left={5}
           />
           <ItemDesktop
-            handleOpenWindow={handleLeaderboard}
-            isViewAlreadyEnabled={showLeaderboard}
+            onClick={() => onOpenWindow(UI_ELEMENTS.leaderboard.title)}
             img={UI_ELEMENTS.leaderboard.img}
             title={UI_ELEMENTS.leaderboard.title}
             imageSize={56}
@@ -129,8 +116,7 @@ function App() {
             left={5}
           />
           <ItemDesktop
-            handleOpenWindow={handleWindowRecycle}
-            isViewAlreadyEnabled={showGameMarket}
+            onClick={() => onOpenWindow(UI_ELEMENTS.gameMarket.title)}
             img={UI_ELEMENTS.gameMarket.img}
             title={UI_ELEMENTS.gameMarket.title}
             imageSize={56}
@@ -142,10 +128,14 @@ function App() {
             showLeaderboard && (
               <div
                 style={{ zIndex: getZIndex(UI_ELEMENTS.leaderboard.title) }}
-                onClick={() => handleWindowClick(UI_ELEMENTS.leaderboard.title)}
+                onClick={() =>
+                  onClickOnAlreadyOpenedWindow(UI_ELEMENTS.leaderboard.title)
+                }
               >
                 <Window
-                  handleCloseWindow={handleLeaderboard}
+                  handleCloseWindow={() =>
+                    onCloseWindow(UI_ELEMENTS.leaderboard.title)
+                  }
                   img={UI_ELEMENTS.leaderboard.img}
                   title={UI_ELEMENTS.leaderboard.title}
                   defaultPosition={
@@ -165,10 +155,14 @@ function App() {
           {openWindows.includes(UI_ELEMENTS.aboutMe.title) && showAboutMe && (
             <div
               style={{ zIndex: getZIndex(UI_ELEMENTS.aboutMe.title) }}
-              onClick={() => handleWindowClick(UI_ELEMENTS.aboutMe.title)}
+              onClick={() =>
+                onClickOnAlreadyOpenedWindow(UI_ELEMENTS.aboutMe.title)
+              }
             >
               <Window
-                handleCloseWindow={handleWindowAbout}
+                handleCloseWindow={() =>
+                  onCloseWindow(UI_ELEMENTS.aboutMe.title)
+                }
                 img={UI_ELEMENTS.aboutMe.img}
                 title={UI_ELEMENTS.aboutMe.title}
                 defaultPosition={

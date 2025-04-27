@@ -1,14 +1,12 @@
 export const ItemDesktop = ({
-  handleOpenWindow,
-  isViewAlreadyEnabled,
+  onClick,
   img,
   title,
   top,
   left,
   imageSize = 48,
 }: {
-  handleOpenWindow: () => void;
-  isViewAlreadyEnabled: boolean;
+  onClick: () => void;
   img: string;
   title: string;
   top: number;
@@ -17,7 +15,7 @@ export const ItemDesktop = ({
 }) => {
   return (
     <div
-      onClick={isViewAlreadyEnabled ? () => null : handleOpenWindow}
+      onClick={onClick}
       className="absolute flex flex-col items-center text-center cursor-pointer w-[110px] active:border active:border-black active:border-t-white active:border-l-white"
       style={{
         top: `${top}px`,
