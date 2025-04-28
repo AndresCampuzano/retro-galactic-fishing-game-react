@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { ErrorMessage } from "../common/ErrorMessage";
+import { CardItem } from "../CardItem"; // Import the new CardItem component
 
 enum SORTING {
   RANK = "rank",
@@ -81,16 +82,19 @@ export const LeaderboardContent = ({
           alt="gold coin"
           className="w-6 object-contain"
         />
+        <p className="text-xl">Gold</p>
         <img
           src="images/coin_silver_x2.png"
           alt="silver coin"
           className="w-6 object-contain"
         />
+        <p className="text-xl">Silver</p>
         <img
           src="images/coin_bronze_x2.png"
           alt="bronze coin"
           className="w-6 object-contain"
         />
+        <p className="text-xl">Bronze</p>
       </div>
       <div className="flex flex-wrap gap-4 mb-4 items-center">
         <div className="relative flex items-center w-full md:max-w-[60%]">
@@ -133,73 +137,17 @@ export const LeaderboardContent = ({
 
       <ul className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
         {filteredPlayers?.map((item) => (
-          <li
+          <CardItem
             key={item.username}
-            className={`relative flex flex-col border-black m-5 p-2 border-2 ${
-              item.rank === 1
-                ? "bg-[#FFD700]"
-                : item.rank === 2
-                  ? "bg-[#E5E5E5]"
-                  : item.rank === 3
-                    ? "bg-[#b87333]"
-                    : "bg-gray-300"
-            }`}
-          >
-            {item.rank <= 3 && (
-              <img
-                src={`images/${
-                  item.rank === 1
-                    ? "coin_gold"
-                    : item.rank === 2
-                      ? "coin_silver"
-                      : "coin_bronze"
-                }_x2.png`}
-                alt="rank coin"
-                title={`Rank ${item.rank}`}
-                className="w-10 absolute -top-4 -left-4"
-              />
-            )}
-
-            {item.isInfected && (
-              <img
-                src="images/spider.png"
-                alt="spider card"
-                title="Infected player"
-                className="w-8 absolute -top-4 -right-4"
-              />
-            )}
-            <div className="flex flex-col items-center mb-2">
-              <p className="text-lg leading-none">#{item.rank}</p>
-              <p className="text-xl leading-none">{item.username}</p>
-            </div>
-            <div className="flex gap-1 items-center">
-              <img
-                src="images/freecell.png"
-                alt="freecell level"
-                className="w-5"
-              />
-              <p className="ml-1">Level {item.level}</p>
-            </div>
-            <div className="flex gap-1 items-center">
-              <img
-                src="images/joystick.png"
-                alt="joystick xp"
-                className="w-5"
-              />
-              <p className="ml-1">XP {item.xp}</p>
-            </div>
-            <div className="flex gap-1 items-center">
-              <img
-                src="images/coin_gold_x2.png"
-                alt="gold coin"
-                className="w-6"
-              />
-              <p className="">Gold {item.gold}</p>
-            </div>
-            <p>
-              {item.fishEmojis} {item.emojiDescription}
-            </p>
-          </li>
+            rank={item.rank}
+            username={item.username}
+            level={item.level}
+            xp={item.xp}
+            gold={item.gold}
+            fishEmojis={item.fishEmojis}
+            emojiDescription={item.emojiDescription}
+            isInfected={item.isInfected}
+          />
         ))}
       </ul>
     </>
