@@ -1,7 +1,7 @@
 import { Screen } from "./components/Screen.tsx";
 import { BottomBar } from "./components/BottomBar.tsx";
 import { ItemDesktop } from "./components/ItemDesktop.tsx";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type MouseEvent } from "react";
 import { StartMenu } from "./components/StartMenu.tsx";
 import { Window } from "./components/Window.tsx";
 import { useWindowDimensions } from "./hooks/useWindowDimensions.ts";
@@ -113,6 +113,15 @@ function App() {
     return index + 1;
   };
 
+  /**
+   * Handle click outside the start menu to close it
+   * Prevent triggering when clicking on the start menu button
+   */
+  const handleStartMenu = (event: MouseEvent) => {
+    event.stopPropagation();
+    setStartMenu((prev) => !prev);
+  };
+
   if (showInitialScreen) {
     return <InitialScreen />;
   }
@@ -217,7 +226,7 @@ function App() {
         <StartMenu onCloseStartMenu={() => setStartMenu(false)} />
       )}
       <BottomBar>
-        <PrimaryButton onClick={() => setStartMenu((prevState) => !prevState)}>
+        <PrimaryButton onClick={handleStartMenu} id="start-menu-button">
           <img
             src="images/windows-logo.png"
             alt="windows logo"
