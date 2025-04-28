@@ -23,6 +23,9 @@ export const LeaderboardContent = ({
             <span>gold: {item.gold}</span>
             <span>level: {item.level}</span>
             <span>rank: {item.rank}</span>
+            <span>fishEmojis: {item.fishEmojis}</span>
+            <span>emojiDescription: {item.emojiDescription}</span>
+            <span>isInfected: {item.isInfected ? "Yes" : "No"}</span>
           </li>
         ))}
       </ul>
