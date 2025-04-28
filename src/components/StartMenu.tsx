@@ -8,7 +8,7 @@ export const StartMenu = ({
   onCloseStartMenu: () => void;
   onOpenWindow: (title: string) => void;
 }) => {
-  const handleClickWindow = (title: string) => {
+  const onOpenWindowHandler = (title: string) => {
     onOpenWindow(title);
     onCloseStartMenu();
   };
@@ -30,7 +30,7 @@ export const StartMenu = ({
         </div>
 
         <div
-          onClick={() => handleClickWindow(UI_ELEMENTS.leaderboard.title)}
+          onClick={() => onOpenWindowHandler(UI_ELEMENTS.leaderboard.title)}
           className="flex items-center px-[15px] py-[5px] w-full h-[60px] cursor-pointer text-black hover:bg-[#031860] hover:text-[#fafafa]"
         >
           <img
@@ -42,7 +42,7 @@ export const StartMenu = ({
         </div>
 
         <div
-          onClick={() => handleClickWindow(UI_ELEMENTS.gameMarket.title)}
+          onClick={() => onOpenWindowHandler(UI_ELEMENTS.gameMarket.title)}
           className="flex items-center px-[15px] py-[5px] w-full h-[60px] cursor-pointer text-black hover:bg-[#031860] hover:text-[#fafafa]"
         >
           <img
@@ -54,7 +54,7 @@ export const StartMenu = ({
         </div>
 
         <div
-          onClick={() => handleClickWindow(UI_ELEMENTS.aboutMe.title)}
+          onClick={() => onOpenWindowHandler(UI_ELEMENTS.aboutMe.title)}
           className="flex items-center px-[15px] py-[5px] w-full h-[60px] cursor-pointer text-black hover:bg-[#031860] hover:text-[#fafafa]"
         >
           <img src={UI_ELEMENTS.aboutMe.img} alt="about icon" width="35px" />
