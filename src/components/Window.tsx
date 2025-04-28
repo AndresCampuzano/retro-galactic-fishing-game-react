@@ -95,7 +95,7 @@ export const Window = ({
               <button
                 type="button"
                 onClick={onCloseWindow}
-                className="flex justify-center items-center p-[2px] h-[23px] w-[23px] bg-[#c3c3c3] border-t-[2.5px] border-l-[2.5px] border-l-white border-t-white border-r-[2.5px] border-r-black border-b-[2.5px] border-b-black cursor-pointer font-[VT323] text-[20px]"
+                className="flex justify-center items-center p-[2px] h-[23px] w-[23px] bg-[#c3c3c3] border-t-[2.5px] border-l-[2.5px] border-l-white border-t-white border-r-[2.5px] border-r-black border-b-[2.5px] border-b-black cursor-pointer  active:bg-gray-500"
               >
                 <img src="images/close-icon.png" alt="close" width={10} />
               </button>
