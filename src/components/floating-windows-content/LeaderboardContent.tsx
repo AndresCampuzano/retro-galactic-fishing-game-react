@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 export const LeaderboardContent = ({
   data,
@@ -16,25 +16,26 @@ export const LeaderboardContent = ({
     const handler = setTimeout(() => {
       setDebouncedSearchTerm(searchTerm);
     }, 300);
-    // NOTE: I'm simulating a delay here, often used to prevent excessive API requests,
-    // but since we're not making any API calls, it's just for the sake of the example.
     return () => {
       clearTimeout(handler);
     };
   }, [searchTerm]);
 
-  const filteredPlayers = data?.players?.filter((player) => {
+  const filteredPlayers = useMemo(() => {
+    if (!data?.players) return [];
     const search = debouncedSearchTerm.toLowerCase();
-    return (
-      player.username.toLowerCase().includes(search) ||
-      player.rank.toString().includes(search) ||
-      player.level.toString().includes(search) ||
-      player.xp.toString().includes(search) ||
-      player.gold.toString().includes(search) ||
-      player.fishEmojis.toLowerCase().includes(search) ||
-      player.emojiDescription.toLowerCase().includes(search)
-    );
-  });
+    return data.players.filter((player) => {
+      return (
+        player.username.toLowerCase().includes(search) ||
+        player.rank.toString().includes(search) ||
+        player.level.toString().includes(search) ||
+        player.xp.toString().includes(search) ||
+        player.gold.toString().includes(search) ||
+        player.fishEmojis.toLowerCase().includes(search) ||
+        player.emojiDescription.toLowerCase().includes(search)
+      );
+    });
+  }, [debouncedSearchTerm, data?.players]);
 
   return (
     <>
@@ -49,9 +50,9 @@ export const LeaderboardContent = ({
       <ul className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
         {loading && <p>Loading...</p>}
         {error && <p>Error: {error.message}</p>}
-        {filteredPlayers?.map((item) => (
+        {filteredPlayers.map((item) => (
           <li
-            key={item.username} // Assuming username is unique
+            key={item.username}
             className={`relative flex flex-col border-black m-5 p-2 border-2 ${
               item.rank === 1
                 ? "bg-[#FFD700]"
