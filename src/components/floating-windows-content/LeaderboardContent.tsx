@@ -15,7 +15,7 @@ export const LeaderboardContent = ({
         {error && <p>Error: {error.message}</p>}
         {data?.players?.map((item) => (
           <li
-            key={item.username}
+            key={item.username} // Assuming username is unique
             className="flex justify-between items-center p-2 border-b border-gray-300"
           >
             <span>{item.username}</span>
