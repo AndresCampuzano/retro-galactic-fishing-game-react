@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
+import { ErrorMessage } from "../common/ErrorMessage";
 
 enum SORTING {
   RANK = "rank",
@@ -12,10 +13,12 @@ export const LeaderboardContent = ({
   data,
   loading,
   error,
+  retryFetch,
 }: {
   data: GameLeaderboard | null;
   loading: boolean;
   error: Error | null;
+  retryFetch: () => void;
 }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
@@ -61,12 +64,40 @@ export const LeaderboardContent = ({
 
   return (
     <>
-      <h1 className="text-[40px]">Leader-board</h1>
+      <div className="flex gap-2">
+        <h1 className="text-[40px]">Leader-board</h1>
+        <img
+          src="images/leaderboard.png"
+          alt="leaderboard icon"
+          className="w-6 object-contain"
+        />
+      </div>
+      <div className="flex gap-2 mb-2">
+        <p className="text-xl">
+          Showing all players in the game, ranked by their performance.
+        </p>
+        <img
+          src="images/coin_gold_x2.png"
+          alt="gold coin"
+          className="w-6 object-contain"
+        />
+        <img
+          src="images/coin_silver_x2.png"
+          alt="silver coin"
+          className="w-6 object-contain"
+        />
+        <img
+          src="images/coin_bronze_x2.png"
+          alt="bronze coin"
+          className="w-6 object-contain"
+        />
+      </div>
       <div className="flex flex-wrap gap-4 mb-4 items-center">
         <input
           type="text"
           placeholder="Search by username, rank, level, xp, gold, fish emojis..."
           value={searchTerm}
+          disabled={loading || error !== null}
           onChange={(e) => setSearchTerm(e.target.value)}
           className="border border-gray-400 p-2 w-full md:max-w-[60%] bg-gray-200 text-black shadow-inner focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
@@ -74,6 +105,7 @@ export const LeaderboardContent = ({
           <p>Sort by:</p>
           <select
             value={sortOption}
+            disabled={loading || error !== null}
             onChange={(e) => setSortOption(e.target.value as SORTING)}
             className="border border-gray-400 p-2 bg-gray-200 text-black shadow-inner focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
@@ -85,10 +117,11 @@ export const LeaderboardContent = ({
           </select>
         </div>
       </div>
+      {loading && <p>Loading...</p>}
+      {error && <ErrorMessage error={error} retryFetch={retryFetch} />}
+
       <ul className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
-        {loading && <p>Loading...</p>}
-        {error && <p>Error: {error.message}</p>}
-        {filteredPlayers.map((item) => (
+        {filteredPlayers?.map((item) => (
           <li
             key={item.username}
             className={`relative flex flex-col border-black m-5 p-2 border-2 ${
