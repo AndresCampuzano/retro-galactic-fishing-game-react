@@ -8,8 +8,8 @@ export function fetchGameLeaderboard(): Promise<GameLeaderboard> {
   });
 }
 
-export function fetchGameMarket(): Promise<GameMarket[]> {
-  return fetchFromService<GameMarket[]>(BASE_URL, "/game/market", {
+export function fetchGameMarket(): Promise<GameMarket> {
+  return fetchFromService<GameMarket>(BASE_URL, "/game/market", {
     method: "GET",
   });
 }

@@ -13,14 +13,18 @@ interface Player {
   isInfected: boolean;
 }
 
-interface GameLeaderboard {
-  players: Player[];
-}
-
-interface GameMarket {
+interface Item {
   id: string;
   name: string;
   type: string;
   description: string;
   cost: number;
+}
+
+interface GameLeaderboard {
+  players: Player[];
+}
+
+interface GameMarket {
+  items: Item[];
 }

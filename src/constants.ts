@@ -5,7 +5,7 @@ export const UI_ELEMENTS = {
   },
   leaderboard: {
     img: "images/leaderboard.png",
-    title: "Leaderboard",
+    title: "Leader-board",
   },
   gameMarket: {
     img: "images/open-book.png",

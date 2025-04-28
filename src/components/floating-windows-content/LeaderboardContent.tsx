@@ -2,13 +2,13 @@ import { useState, useEffect, useMemo } from "react";
 import { ErrorMessage } from "../common/ErrorMessage";
 import { CardItem } from "../CardItem";
 
-enum SORTING {
-  RANK = "rank",
-  LEVEL = "level",
-  XP = "xp",
-  GOLD = "gold",
-  INFECTED = "infected",
-}
+const SORTING = {
+  RANK: "rank",
+  LEVEL: "level",
+  XP: "xp",
+  GOLD: "gold",
+  INFECTED: "infected",
+};
 
 export const LeaderboardContent = ({
   data,
@@ -65,91 +65,95 @@ export const LeaderboardContent = ({
 
   return (
     <>
-      <div className="flex gap-2">
-        <h1 className="text-[40px]">Leader-board</h1>
-        <img
-          src="images/leaderboard.png"
-          alt="leaderboard icon"
-          className="w-6 object-contain"
-        />
-      </div>
-      <div className="flex flex-wrap items-center gap-x-2 mb-2">
-        <p className="text-xl">
-          Showing all players in the game, ranked by their performance.
-        </p>
-        <img
-          src="images/coin_gold_x2.png"
-          alt="gold coin"
-          className="w-6 object-contain"
-        />
-        <p className="text-xl">Gold</p>
-        <img
-          src="images/coin_silver_x2.png"
-          alt="silver coin"
-          className="w-6 object-contain"
-        />
-        <p className="text-xl">Silver</p>
-        <img
-          src="images/coin_bronze_x2.png"
-          alt="bronze coin"
-          className="w-6 object-contain"
-        />
-        <p className="text-xl">Bronze</p>
-      </div>
-      <div className="flex flex-wrap gap-4 mb-4 items-center">
-        <div className="relative flex items-center w-full md:max-w-[60%]">
-          <input
-            type="text"
-            placeholder="Search by username, rank, level, xp, gold, fish emojis..."
-            value={searchTerm}
-            disabled={loading || error !== null}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="border border-gray-400 p-2 w-full bg-gray-200 text-black shadow-inner focus:outline-none focus:ring-2 focus:ring-blue-500"
+      <section className="mb-1 px-5">
+        <div className="flex gap-2">
+          <h1 className="text-[40px]">Leader-board</h1>
+          <img
+            src="images/leaderboard.png"
+            alt="leaderboard icon"
+            className="w-6 object-contain"
           />
-          {searchTerm.trim() && (
-            <button
-              type="button"
-              onClick={() => setSearchTerm("")}
-              className="absolute right-2 flex justify-center items-center p-[2px] h-[23px] w-[23px] bg-[#c3c3c3] border-t-[2.5px] border-l-[2.5px] border-l-white border-t-white border-r-[2.5px] border-r-black border-b-[2.5px] border-b-black cursor-pointer active:bg-gray-500"
+        </div>
+        <div className="flex flex-wrap items-center gap-x-2 mb-2">
+          <p className="text-xl">
+            Showing all players in the game, ranked by their performance.
+          </p>
+          <img
+            src="images/coin_gold_x2.png"
+            alt="gold coin"
+            className="w-6 object-contain"
+          />
+          <p className="text-xl">Gold</p>
+          <img
+            src="images/coin_silver_x2.png"
+            alt="silver coin"
+            className="w-6 object-contain"
+          />
+          <p className="text-xl">Silver</p>
+          <img
+            src="images/coin_bronze_x2.png"
+            alt="bronze coin"
+            className="w-6 object-contain"
+          />
+          <p className="text-xl">Bronze</p>
+        </div>
+        <div className="flex flex-wrap gap-4 mb-4 items-center">
+          <div className="relative flex items-center w-full md:max-w-[60%]">
+            <input
+              type="text"
+              placeholder="Search by username, rank, level, xp, gold, fish emojis..."
+              value={searchTerm}
+              disabled={loading || error !== null}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="border border-gray-400 p-2 w-full bg-gray-200 text-black shadow-inner focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            {searchTerm.trim() && (
+              <button
+                type="button"
+                onClick={() => setSearchTerm("")}
+                className="absolute right-2 flex justify-center items-center p-[2px] h-[23px] w-[23px] bg-[#c3c3c3] border-t-[2.5px] border-l-[2.5px] border-l-white border-t-white border-r-[2.5px] border-r-black border-b-[2.5px] border-b-black cursor-pointer active:bg-gray-500"
+              >
+                <img src="images/close-icon.png" alt="close" width={10} />
+              </button>
+            )}
+          </div>
+          <div className="flex items-center gap-2">
+            <p>Sort by:</p>
+            <select
+              value={sortOption}
+              disabled={loading || error !== null}
+              onChange={(e) => setSortOption(e.target.value)}
+              className="border border-gray-400 p-2 bg-gray-200 text-black shadow-inner focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-              <img src="images/close-icon.png" alt="close" width={10} />
-            </button>
-          )}
+              <option value={SORTING.RANK}>Rank</option>
+              <option value={SORTING.LEVEL}>Level</option>
+              <option value={SORTING.XP}>XP</option>
+              <option value={SORTING.GOLD}>Gold</option>
+              <option value={SORTING.INFECTED}>Infected</option>
+            </select>
+          </div>
         </div>
-        <div className="flex items-center gap-2">
-          <p>Sort by:</p>
-          <select
-            value={sortOption}
-            disabled={loading || error !== null}
-            onChange={(e) => setSortOption(e.target.value as SORTING)}
-            className="border border-gray-400 p-2 bg-gray-200 text-black shadow-inner focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            <option value={SORTING.RANK}>Rank</option>
-            <option value={SORTING.LEVEL}>Level</option>
-            <option value={SORTING.XP}>XP</option>
-            <option value={SORTING.GOLD}>Gold</option>
-            <option value={SORTING.INFECTED}>Infected</option>
-          </select>
-        </div>
-      </div>
-      {loading && <p>Loading...</p>}
-      {error && <ErrorMessage error={error} retryFetch={retryFetch} />}
+        {loading && <p>Loading...</p>}
+        {error && <ErrorMessage error={error} retryFetch={retryFetch} />}
+      </section>
 
-      <ul className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
-        {filteredPlayers?.map((item) => (
-          <CardItem
-            key={item.username}
-            rank={item.rank}
-            username={item.username}
-            level={item.level}
-            xp={item.xp}
-            gold={item.gold}
-            fishEmojis={item.fishEmojis}
-            emojiDescription={item.emojiDescription}
-            isInfected={item.isInfected}
-          />
-        ))}
-      </ul>
+      <section>
+        <ul className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
+          {filteredPlayers?.map((item) => (
+            <CardItem
+              key={item.username}
+              rank={item.rank}
+              username={item.username}
+              level={item.level}
+              xp={item.xp}
+              gold={item.gold}
+              fishEmojis={item.fishEmojis}
+              emojiDescription={item.emojiDescription}
+              isInfected={item.isInfected}
+            />
+          ))}
+        </ul>
+      </section>
     </>
   );
 };

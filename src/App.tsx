@@ -11,7 +11,7 @@ import { AboutContent } from "./components/floating-windows-content/AboutContent
 import { PrimaryButton } from "./components/PrimaryButton.tsx";
 import { InitialScreen } from "./components/InitialScreen.tsx";
 import { useFetch } from "./hooks/useFetch.ts";
-import { fetchGameLeaderboard } from "./api/game.service.ts";
+import { fetchGameLeaderboard, fetchGameMarket } from "./api/game.service.ts";
 import { UI_ELEMENTS } from "./constants.ts";
 
 function App() {
@@ -31,11 +31,12 @@ function App() {
     refetch: retryFetch,
   } = useFetch(fetchGameLeaderboard, true);
 
-  // const {
-  //   data: gameMarketData,
-  //   error: gameMarketError,
-  //   loading: gameMarketLoading,
-  // } = useFetch(fetchGameMarket, true);
+  const {
+    data: gameMarketData,
+    error: gameMarketError,
+    loading: gameMarketLoading,
+    refetch: retryFetchGameMarket,
+  } = useFetch(fetchGameMarket, true);
 
   /**
    * Showing initial screen for 3.5 seconds when the page loads
@@ -59,7 +60,7 @@ function App() {
 
   useEffect(() => {
     // Opening windows when page loads
-    setOpenWindows([UI_ELEMENTS.leaderboard.title]);
+    setOpenWindows([UI_ELEMENTS.gameMarket.title]); // FIXME: only for testing
   }, []);
 
   /**
@@ -185,7 +186,12 @@ function App() {
                 height: windowHeight,
               }}
             >
-              <GameMarketContent />
+              <GameMarketContent
+                data={gameMarketData}
+                loading={gameMarketLoading}
+                error={gameMarketError}
+                retryFetch={retryFetchGameMarket}
+              />
             </Window>
           )}
 
