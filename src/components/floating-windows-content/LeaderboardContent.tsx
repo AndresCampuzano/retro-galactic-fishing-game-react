@@ -1,5 +1,13 @@
 import { useState, useEffect, useMemo } from "react";
 
+// Define an enum for sorting options
+enum SORTING {
+  RANK = "rank",
+  LEVEL = "level",
+  XP = "xp",
+  GOLD = "gold",
+}
+
 export const LeaderboardContent = ({
   data,
   loading,
@@ -11,6 +19,7 @@ export const LeaderboardContent = ({
 }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
+  const [sortOption, setSortOption] = useState(SORTING.RANK); // Default sort by rank
 
   // NOTE: I'm simulating a delay here, debounce is often used to prevent excessive API requests,
   // but since we're not making any API calls when searchTerm changes, it's just for the sake of the example.
@@ -26,7 +35,7 @@ export const LeaderboardContent = ({
   const filteredPlayers = useMemo(() => {
     if (!data?.players) return [];
     const search = debouncedSearchTerm.toLowerCase();
-    return data.players.filter((player) => {
+    const filtered = data.players.filter((player) => {
       return (
         player.username.toLowerCase().includes(search) ||
         player.rank.toString().includes(search) ||
@@ -37,18 +46,42 @@ export const LeaderboardContent = ({
         player.emojiDescription.toLowerCase().includes(search)
       );
     });
-  }, [debouncedSearchTerm, data?.players]);
+
+    // Sort based on the selected option
+    return filtered.sort((a, b) => {
+      if (sortOption === SORTING.RANK) return a.rank - b.rank;
+      if (sortOption === SORTING.LEVEL) return b.level - a.level;
+      if (sortOption === SORTING.XP) return b.xp - a.xp;
+      if (sortOption === SORTING.GOLD) return b.gold - a.gold;
+      return 0;
+    });
+  }, [debouncedSearchTerm, data?.players, sortOption]);
 
   return (
     <>
       <h1 className="text-[40px]">Leader-board</h1>
-      <input
-        type="text"
-        placeholder="Search by username, rank, level, xp, gold, fish emojis..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        className="border border-gray-400 p-2 mb-4 w-full bg-gray-200 text-black shadow-inner focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
+      <div className="flex flex-wrap gap-4 mb-4 items-center">
+        <input
+          type="text"
+          placeholder="Search by username, rank, level, xp, gold, fish emojis..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="border border-gray-400 p-2 w-full md:max-w-[60%] bg-gray-200 text-black shadow-inner focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <div className="flex items-center gap-2">
+          <p>Sort by:</p>
+          <select
+            value={sortOption}
+            onChange={(e) => setSortOption(e.target.value as SORTING)}
+            className="border border-gray-400 p-2 bg-gray-200 text-black shadow-inner focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value={SORTING.RANK}>Rank</option>
+            <option value={SORTING.LEVEL}>Level</option>
+            <option value={SORTING.XP}>XP</option>
+            <option value={SORTING.GOLD}>Gold</option>
+          </select>
+        </div>
+      </div>
       <ul className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
         {loading && <p>Loading...</p>}
         {error && <p>Error: {error.message}</p>}
