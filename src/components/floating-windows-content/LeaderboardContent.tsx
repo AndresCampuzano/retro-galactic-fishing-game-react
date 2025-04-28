@@ -9,8 +9,8 @@ export const LeaderboardContent = ({
 }) => {
   return (
     <>
-      <p>LeaderboardContent here</p>
-      <ul className="grid grid-cols-4 grid-rows-4">
+      <h1 className="text-xl">Leader-board</h1>
+      <ul className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
         {loading && <p>Loading...</p>}
         {error && <p>Error: {error.message}</p>}
         {data?.players?.map((item, index) => (
