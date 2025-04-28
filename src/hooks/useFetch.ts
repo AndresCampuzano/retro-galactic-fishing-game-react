@@ -15,7 +15,7 @@ import { useState, useEffect, useCallback } from "react";
  *
  * @example
  * ```
- * const { data, loading, error, refetch } = useFetch<User[]>(
+ * const { data, loading, error, refetch } = useFetch<Player[]>(
  *   () => fetchUsers(),
  *   true
  * );

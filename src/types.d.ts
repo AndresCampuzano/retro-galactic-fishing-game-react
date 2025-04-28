@@ -2,7 +2,7 @@ interface RequestInitExtended extends RequestInit {
   params?: Record<string, number | Date | string>;
 }
 
-interface User {
+interface Player {
   rank: number;
   username: string;
   level: number;
@@ -14,7 +14,7 @@ interface User {
 }
 
 interface GameLeaderboard {
-  players: User[];
+  players: Player[];
 }
 
 interface GameMarket {
