@@ -28,6 +28,7 @@ function App() {
     data: leaderboardData,
     error: leaderboardError,
     loading: leaderboardLoading,
+    refetch: retryFetch,
   } = useFetch(fetchGameLeaderboard, true);
 
   // const {
@@ -163,6 +164,7 @@ function App() {
                 data={leaderboardData}
                 loading={leaderboardLoading}
                 error={leaderboardError}
+                retryFetch={retryFetch}
               />
             </Window>
           )}
