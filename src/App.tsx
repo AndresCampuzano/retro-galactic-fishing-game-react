@@ -33,7 +33,7 @@ function App() {
   const [showInitialScreen, setShowInitialScreen] = useState<boolean>(false); // FIXME: only for testing
   const [openWindows, setOpenWindows] = useState<string[]>([]);
   const { height, width, isMobile } = useWindowDimensions();
-  const calculatedMaxHeight = height * 0.8 - 60; // Calculate the max height of the floating window
+  const calculatedMaxHeight = height * 0.9;
   const [windowHeight, setWindowHeight] = useState<string | number>(
     calculatedMaxHeight,
   );
@@ -50,23 +50,9 @@ function App() {
     loading: gameMarketLoading,
   } = useFetch(fetchGameMarket, true);
 
-  useEffect(() => {
-    console.log({
-      leaderboardData,
-      leaderboardError,
-      leaderboardLoading,
-    });
-  }, [leaderboardData, leaderboardError, leaderboardLoading]);
-
-  useEffect(() => {
-    console.log({
-      gameMarketData,
-      gameMarketError,
-      gameMarketLoading,
-    });
-  }, [gameMarketData, gameMarketError, gameMarketLoading]);
-
-  // Showing initial screen for 3.5 seconds when the page loads
+  /**
+   * Showing initial screen for 3.5 seconds when the page loads
+   */
   useEffect(() => {
     setTimeout(() => {
       setShowInitialScreen(false);
