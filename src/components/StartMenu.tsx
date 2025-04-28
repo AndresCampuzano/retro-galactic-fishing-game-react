@@ -8,6 +8,11 @@ export const StartMenu = ({
   onCloseStartMenu: () => void;
   onOpenWindow: (title: string) => void;
 }) => {
+  const handleClickWindow = (title: string) => {
+    onOpenWindow(title);
+    onCloseStartMenu();
+  };
+
   return (
     <OutsideClickHandler
       onOutsideClick={(event) => {
@@ -25,7 +30,7 @@ export const StartMenu = ({
         </div>
 
         <div
-          onClick={() => onOpenWindow(UI_ELEMENTS.leaderboard.title)}
+          onClick={() => handleClickWindow(UI_ELEMENTS.leaderboard.title)}
           className="flex items-center px-[15px] py-[5px] w-full h-[60px] cursor-pointer text-black hover:bg-[#031860] hover:text-[#fafafa]"
         >
           <img
@@ -37,7 +42,7 @@ export const StartMenu = ({
         </div>
 
         <div
-          onClick={() => onOpenWindow(UI_ELEMENTS.gameMarket.title)}
+          onClick={() => handleClickWindow(UI_ELEMENTS.gameMarket.title)}
           className="flex items-center px-[15px] py-[5px] w-full h-[60px] cursor-pointer text-black hover:bg-[#031860] hover:text-[#fafafa]"
         >
           <img
@@ -49,14 +54,12 @@ export const StartMenu = ({
         </div>
 
         <div
-          onClick={() => onOpenWindow(UI_ELEMENTS.aboutMe.title)}
+          onClick={() => handleClickWindow(UI_ELEMENTS.aboutMe.title)}
           className="flex items-center px-[15px] py-[5px] w-full h-[60px] cursor-pointer text-black hover:bg-[#031860] hover:text-[#fafafa]"
         >
           <img src={UI_ELEMENTS.aboutMe.img} alt="about icon" width="35px" />
           <p className="ml-[10px] text-[1.2rem]">About Me</p>
         </div>
-
-        {/* ...existing code for external links... */}
       </div>
     </OutsideClickHandler>
   );
