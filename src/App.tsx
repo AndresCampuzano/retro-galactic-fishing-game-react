@@ -11,7 +11,7 @@ import { AboutContent } from "./components/floating-windows-content/AboutContent
 import { PrimaryButton } from "./components/PrimaryButton.tsx";
 import { InitialScreen } from "./components/InitialScreen.tsx";
 import { useFetch } from "./hooks/useFetch.ts";
-import { fetchGameLeaderboard, fetchGameMarket } from "./api/game.service.ts";
+import { fetchGameLeaderboard } from "./api/game.service.ts";
 
 const UI_ELEMENTS = {
   aboutMe: {
@@ -44,11 +44,11 @@ function App() {
     loading: leaderboardLoading,
   } = useFetch(fetchGameLeaderboard, true);
 
-  const {
-    data: gameMarketData,
-    error: gameMarketError,
-    loading: gameMarketLoading,
-  } = useFetch(fetchGameMarket, true);
+  // const {
+  //   data: gameMarketData,
+  //   error: gameMarketError,
+  //   loading: gameMarketLoading,
+  // } = useFetch(fetchGameMarket, true);
 
   /**
    * Showing initial screen for 3.5 seconds when the page loads
