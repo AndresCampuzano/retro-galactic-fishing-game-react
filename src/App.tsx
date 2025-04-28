@@ -33,7 +33,7 @@ function App() {
   const [showInitialScreen, setShowInitialScreen] = useState<boolean>(false); // FIXME: only for testing
   const [openWindows, setOpenWindows] = useState<string[]>([]);
   const { height, width, isMobile } = useWindowDimensions();
-  const calculatedMaxHeight = height * 0.9;
+  const calculatedMaxHeight = height - 80;
   const [windowHeight, setWindowHeight] = useState<string | number>(
     calculatedMaxHeight,
   );
@@ -113,10 +113,6 @@ function App() {
     return index + 1;
   };
 
-  const handleStartMenu = () => {
-    setStartMenu((prev) => !prev);
-  };
-
   if (showInitialScreen) {
     return <InitialScreen />;
   }
@@ -160,7 +156,7 @@ function App() {
               onCloseWindow={() => onCloseWindow(UI_ELEMENTS.leaderboard.title)}
               img={UI_ELEMENTS.leaderboard.img}
               title={UI_ELEMENTS.leaderboard.title}
-              defaultPosition={isMobile ? { x: 0, y: 0 } : { x: 120, y: 50 }}
+              defaultPosition={isMobile ? { x: 0, y: 0 } : { x: 120, y: 10 }}
               style={{
                 zIndex: getZIndex(UI_ELEMENTS.leaderboard.title),
                 width: isMobile ? width : width - 200,
@@ -184,7 +180,7 @@ function App() {
               onCloseWindow={() => onCloseWindow(UI_ELEMENTS.gameMarket.title)}
               img={UI_ELEMENTS.gameMarket.img}
               title={UI_ELEMENTS.gameMarket.title}
-              defaultPosition={isMobile ? { x: 0, y: 0 } : { x: 120, y: 50 }}
+              defaultPosition={isMobile ? { x: 0, y: 0 } : { x: 120, y: 10 }}
               style={{
                 zIndex: getZIndex(UI_ELEMENTS.gameMarket.title),
                 width: isMobile ? width : width - 200,
@@ -204,7 +200,7 @@ function App() {
               onCloseWindow={() => onCloseWindow(UI_ELEMENTS.aboutMe.title)}
               img={UI_ELEMENTS.aboutMe.img}
               title={UI_ELEMENTS.aboutMe.title}
-              defaultPosition={isMobile ? { x: 0, y: 0 } : { x: 120, y: 50 }}
+              defaultPosition={isMobile ? { x: 0, y: 0 } : { x: 120, y: 10 }}
               style={{
                 zIndex: getZIndex(UI_ELEMENTS.aboutMe.title),
                 width: isMobile ? width : width - 200,
@@ -217,9 +213,11 @@ function App() {
           )}
         </div>
       </div>
-      {showStartMenu && <StartMenu onCloseStartMenu={handleStartMenu} />}
+      {showStartMenu && (
+        <StartMenu onCloseStartMenu={() => setStartMenu(false)} />
+      )}
       <BottomBar>
-        <PrimaryButton onClick={handleStartMenu}>
+        <PrimaryButton onClick={() => setStartMenu((prevState) => !prevState)}>
           <img
             src="images/windows-logo.png"
             alt="windows logo"
