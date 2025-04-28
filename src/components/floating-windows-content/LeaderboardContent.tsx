@@ -73,7 +73,7 @@ export const LeaderboardContent = ({
           className="w-6 object-contain"
         />
       </div>
-      <div className="flex gap-2 mb-2">
+      <div className="flex flex-wrap items-center gap-x-2 mb-2">
         <p className="text-xl">
           Showing all players in the game, ranked by their performance.
         </p>
