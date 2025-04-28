@@ -12,21 +12,7 @@ import { PrimaryButton } from "./components/PrimaryButton.tsx";
 import { InitialScreen } from "./components/InitialScreen.tsx";
 import { useFetch } from "./hooks/useFetch.ts";
 import { fetchGameLeaderboard } from "./api/game.service.ts";
-
-const UI_ELEMENTS = {
-  aboutMe: {
-    img: "images/my-computer.png",
-    title: "About this Project",
-  },
-  leaderboard: {
-    img: "images/leaderboard.png",
-    title: "Leaderboard",
-  },
-  gameMarket: {
-    img: "images/open-book.png",
-    title: "Game Market",
-  },
-};
+import { UI_ELEMENTS } from "./constants.ts";
 
 function App() {
   const [showStartMenu, setStartMenu] = useState<boolean>(false);
@@ -223,7 +209,10 @@ function App() {
         </div>
       </div>
       {showStartMenu && (
-        <StartMenu onCloseStartMenu={() => setStartMenu(false)} />
+        <StartMenu
+          onCloseStartMenu={() => setStartMenu(false)}
+          onOpenWindow={onOpenWindow}
+        />
       )}
       <BottomBar>
         <PrimaryButton onClick={handleStartMenu} id="start-menu-button">

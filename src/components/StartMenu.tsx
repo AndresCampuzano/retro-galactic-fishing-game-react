@@ -1,9 +1,12 @@
 import OutsideClickHandler from "react-outside-click-handler";
+import { UI_ELEMENTS } from "../constants.ts";
 
 export const StartMenu = ({
   onCloseStartMenu,
+  onOpenWindow,
 }: {
   onCloseStartMenu: () => void;
+  onOpenWindow: (title: string) => void;
 }) => {
   return (
     <OutsideClickHandler
@@ -21,35 +24,39 @@ export const StartMenu = ({
           </p>
         </div>
 
-        <a
-          href="https://www.linkedin.com/in/andres-campuzano-garzon/"
-          className="flex items-center px-[15px] py-[5px] w-full h-[60px] cursor-pointer text-black no-underline hover:bg-[#031860] hover:text-[#fafafa]"
-          target="_blank"
-          rel="noopener noreferrer"
+        <div
+          onClick={() => onOpenWindow(UI_ELEMENTS.leaderboard.title)}
+          className="flex items-center px-[15px] py-[5px] w-full h-[60px] cursor-pointer text-black hover:bg-[#031860] hover:text-[#fafafa]"
         >
-          <img src="images/linkedin.png" alt="linkedin icon" width="35px" />
-          <p className="ml-[10px] text-[1.2rem]">Linkedin</p>
-        </a>
+          <img
+            src={UI_ELEMENTS.leaderboard.img}
+            alt="leaderboard icon"
+            width="35px"
+          />
+          <p className="ml-[10px] text-[1.2rem]">Leaderboard</p>
+        </div>
 
-        <a
-          href="https://github.com/AndresCampuzano"
-          className="flex items-center px-[15px] py-[5px] w-full h-[60px] cursor-pointer text-black no-underline hover:bg-[#031860] hover:text-[#fafafa]"
-          target="_blank"
-          rel="noopener noreferrer"
+        <div
+          onClick={() => onOpenWindow(UI_ELEMENTS.gameMarket.title)}
+          className="flex items-center px-[15px] py-[5px] w-full h-[60px] cursor-pointer text-black hover:bg-[#031860] hover:text-[#fafafa]"
         >
-          <img src="images/github.png" alt="github icon" width="35px" />
-          <p className="ml-[10px] text-[1.2rem]">GitHub</p>
-        </a>
+          <img
+            src={UI_ELEMENTS.gameMarket.img}
+            alt="game market icon"
+            width="35px"
+          />
+          <p className="ml-[10px] text-[1.2rem]">Game Market</p>
+        </div>
 
-        <a
-          href="mailto:andres.campuzano@icloud.com"
-          className="flex items-center px-[15px] py-[5px] w-full h-[60px] cursor-pointer text-black no-underline hover:bg-[#031860] hover:text-[#fafafa]"
-          target="_blank"
-          rel="noopener noreferrer"
+        <div
+          onClick={() => onOpenWindow(UI_ELEMENTS.aboutMe.title)}
+          className="flex items-center px-[15px] py-[5px] w-full h-[60px] cursor-pointer text-black hover:bg-[#031860] hover:text-[#fafafa]"
         >
-          <img src="images/email.png" alt="email icon" width="35px" />
-          <p className="ml-[10px] text-[1.2rem]">Email</p>
-        </a>
+          <img src={UI_ELEMENTS.aboutMe.img} alt="about icon" width="35px" />
+          <p className="ml-[10px] text-[1.2rem]">About Me</p>
+        </div>
+
+        {/* ...existing code for external links... */}
       </div>
     </OutsideClickHandler>
   );
