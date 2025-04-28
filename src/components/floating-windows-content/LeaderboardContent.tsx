@@ -41,7 +41,7 @@ export const LeaderboardContent = ({
 
   return (
     <>
-      <h1 className="text-xl">Leader-board</h1>
+      <h1 className="text-[40px]">Leader-board</h1>
       <input
         type="text"
         placeholder="Search by username, rank, level, xp, gold, fish emojis..."
@@ -75,6 +75,7 @@ export const LeaderboardContent = ({
                       : "coin_bronze"
                 }_x2.png`}
                 alt="rank coin"
+                title={`Rank ${item.rank}`}
                 className="w-10 absolute -top-4 -left-4"
               />
             )}
@@ -83,6 +84,7 @@ export const LeaderboardContent = ({
               <img
                 src="images/spider.png"
                 alt="spider card"
+                title="Infected player"
                 className="w-8 absolute -top-4 -right-4"
               />
             )}
