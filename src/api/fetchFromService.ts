@@ -38,21 +38,23 @@ export async function fetchFromService<T>(
     });
   }
 
-  const cacheKey = `api-cache:${url.toString()}:${init?.method || 'GET'}`;
+  const cacheKey = `api-cache:${url.toString()}:${init?.method || "GET"}`;
 
   // Check if we're offline
   if (!navigator.onLine) {
-    console.log('Offline mode: fetching from cache for', url.toString());
+    console.log("Offline mode: fetching from cache for", url.toString());
     const cachedData = localStorage.getItem(cacheKey);
     if (cachedData) {
       try {
         return JSON.parse(cachedData) as T;
       } catch (e) {
-        console.error('Error parsing cached data:', e);
-        throw new Error('You are offline and cached data is unavailable');
+        console.error("Error parsing cached data:", e);
+        throw new Error("You are offline and cached data is unavailable");
       }
     } else {
-      throw new Error('You are offline and no cached data is available for this request');
+      throw new Error(
+        "You are offline and no cached data is available for this request",
+      );
     }
   }
 
@@ -88,25 +90,28 @@ export async function fetchFromService<T>(
 
     const text = await response.text();
     if (!text) return null as T;
-    
+
     const data = JSON.parse(text) as T;
-    
+
     // Cache successful responses for offline use
-    if (init?.method === undefined || init?.method === 'GET') {
+    if (init?.method === undefined || init?.method === "GET") {
       try {
         localStorage.setItem(cacheKey, JSON.stringify(data));
       } catch (e) {
-        console.warn('Failed to cache API response:', e);
+        console.warn("Failed to cache API response:", e);
       }
     }
-    
+
     return data;
   } catch (error) {
     // For network errors, try to return cached data as fallback
-    if (!navigator.onLine || error instanceof TypeError && error.message.includes('network')) {
+    if (
+      !navigator.onLine ||
+      (error instanceof TypeError && error.message.includes("network"))
+    ) {
       const cachedData = localStorage.getItem(cacheKey);
       if (cachedData) {
-        console.log('Network error, using cached data for', url.toString());
+        console.log("Network error, using cached data for", url.toString());
         return JSON.parse(cachedData) as T;
       }
     }
