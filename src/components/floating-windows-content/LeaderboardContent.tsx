@@ -12,6 +12,8 @@ export const LeaderboardContent = ({
   const [searchTerm, setSearchTerm] = useState("");
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
 
+  // NOTE: I'm simulating a delay here, debounce is often used to prevent excessive API requests,
+  // but since we're not making any API calls when searchTerm changes, it's just for the sake of the example.
   useEffect(() => {
     const handler = setTimeout(() => {
       setDebouncedSearchTerm(searchTerm);
