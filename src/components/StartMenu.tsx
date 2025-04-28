@@ -35,10 +35,12 @@ export const StartMenu = ({
         >
           <img
             src={UI_ELEMENTS.leaderboard.img}
-            alt="leaderboard icon"
+            alt={UI_ELEMENTS.leaderboard.title}
             width="35px"
           />
-          <p className="ml-[10px] text-[1.2rem]">Leaderboard</p>
+          <p className="ml-[10px] text-[1.2rem]">
+            {UI_ELEMENTS.leaderboard.title}
+          </p>
         </div>
 
         <div
@@ -47,18 +49,24 @@ export const StartMenu = ({
         >
           <img
             src={UI_ELEMENTS.gameMarket.img}
-            alt="game market icon"
+            alt={UI_ELEMENTS.gameMarket.title}
             width="35px"
           />
-          <p className="ml-[10px] text-[1.2rem]">Game Market</p>
+          <p className="ml-[10px] text-[1.2rem]">
+            {UI_ELEMENTS.gameMarket.title}
+          </p>
         </div>
 
         <div
           onClick={() => onOpenWindowHandler(UI_ELEMENTS.aboutMe.title)}
           className="flex items-center px-[15px] py-[5px] w-full h-[60px] cursor-pointer text-black hover:bg-[#031860] hover:text-[#fafafa]"
         >
-          <img src={UI_ELEMENTS.aboutMe.img} alt="about icon" width="35px" />
-          <p className="ml-[10px] text-[1.2rem]">About Me</p>
+          <img
+            src={UI_ELEMENTS.aboutMe.img}
+            alt={UI_ELEMENTS.aboutMe.title}
+            width="35px"
+          />
+          <p className="ml-[10px] text-[1.2rem]">{UI_ELEMENTS.aboutMe.title}</p>
         </div>
       </div>
     </OutsideClickHandler>

@@ -93,14 +93,25 @@ export const LeaderboardContent = ({
         />
       </div>
       <div className="flex flex-wrap gap-4 mb-4 items-center">
-        <input
-          type="text"
-          placeholder="Search by username, rank, level, xp, gold, fish emojis..."
-          value={searchTerm}
-          disabled={loading || error !== null}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="border border-gray-400 p-2 w-full md:max-w-[60%] bg-gray-200 text-black shadow-inner focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
+        <div className="relative flex items-center w-full md:max-w-[60%]">
+          <input
+            type="text"
+            placeholder="Search by username, rank, level, xp, gold, fish emojis..."
+            value={searchTerm}
+            disabled={loading || error !== null}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="border border-gray-400 p-2 w-full bg-gray-200 text-black shadow-inner focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          {searchTerm.trim() && (
+            <button
+              type="button"
+              onClick={() => setSearchTerm("")}
+              className="absolute right-2 flex justify-center items-center p-[2px] h-[23px] w-[23px] bg-[#c3c3c3] border-t-[2.5px] border-l-[2.5px] border-l-white border-t-white border-r-[2.5px] border-r-black border-b-[2.5px] border-b-black cursor-pointer active:bg-gray-500"
+            >
+              <img src="images/close-icon.png" alt="close" width={10} />
+            </button>
+          )}
+        </div>
         <div className="flex items-center gap-2">
           <p>Sort by:</p>
           <select
