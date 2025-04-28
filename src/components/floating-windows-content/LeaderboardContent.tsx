@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { ErrorMessage } from "../common/ErrorMessage";
-import { CardItem } from "../CardItem"; // Import the new CardItem component
+import { CardItem } from "../CardItem";
 
 enum SORTING {
   RANK = "rank",
