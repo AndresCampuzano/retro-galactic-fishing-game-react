@@ -1,11 +1,11 @@
 import { useState, useEffect, useMemo } from "react";
 
-// Define an enum for sorting options
 enum SORTING {
   RANK = "rank",
   LEVEL = "level",
   XP = "xp",
   GOLD = "gold",
+  INFECTED = "infected",
 }
 
 export const LeaderboardContent = ({
@@ -53,6 +53,8 @@ export const LeaderboardContent = ({
       if (sortOption === SORTING.LEVEL) return b.level - a.level;
       if (sortOption === SORTING.XP) return b.xp - a.xp;
       if (sortOption === SORTING.GOLD) return b.gold - a.gold;
+      if (sortOption === SORTING.INFECTED)
+        return (b.isInfected ? 1 : 0) - (a.isInfected ? 1 : 0);
       return 0;
     });
   }, [debouncedSearchTerm, data?.players, sortOption]);
@@ -79,6 +81,7 @@ export const LeaderboardContent = ({
             <option value={SORTING.LEVEL}>Level</option>
             <option value={SORTING.XP}>XP</option>
             <option value={SORTING.GOLD}>Gold</option>
+            <option value={SORTING.INFECTED}>Infected</option>
           </select>
         </div>
       </div>
