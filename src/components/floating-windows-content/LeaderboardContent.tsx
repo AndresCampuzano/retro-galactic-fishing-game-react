@@ -10,22 +10,45 @@ export const LeaderboardContent = ({
   return (
     <>
       <p>LeaderboardContent here</p>
-      <ul className="flex flex-col gap-2">
+      <ul className="grid grid-cols-4 grid-rows-4">
         {loading && <p>Loading...</p>}
         {error && <p>Error: {error.message}</p>}
-        {data?.players?.map((item) => (
+        {data?.players?.map((item, index) => (
           <li
             key={item.username} // Assuming username is unique
-            className="flex justify-between items-center p-2 border-b border-gray-300"
+            className="flex flex-col border-black m-5 p-2 bg-[#cacaca]"
           >
-            <span>{item.username}</span>
-            <span>xp: {item.xp}</span>
-            <span>gold: {item.gold}</span>
-            <span>level: {item.level}</span>
-            <span>rank: {item.rank}</span>
-            <span>fishEmojis: {item.fishEmojis}</span>
-            <span>emojiDescription: {item.emojiDescription}</span>
-            <span>isInfected: {item.isInfected ? "Yes" : "No"}</span>
+            <div className="flex flex-col items-center mb-2">
+              <p className="text-lg">#{index + 1}</p>
+              <p className="text-xl">{item.username}</p>
+            </div>
+            <div className="flex gap-1 items-center">
+              <img
+                src="images/freecell.png"
+                alt="freecell level icon"
+                className="w-5 h-5"
+              />
+              <p className="ml-1">Level {item.level}</p>
+            </div>
+            <div className="flex gap-1 items-center">
+              <img
+                src="images/joystick.png"
+                alt="joystick xp icon"
+                className="w-5 h-5"
+              />
+              <p className="ml-1">XP {item.xp}</p>
+            </div>
+            <div className="flex gap-1 items-center">
+              <img
+                src="images/coin_gold.png"
+                alt="coin gold icon"
+                className="w-6 h-6"
+              />
+              <p className="">Gold {item.gold}</p>
+            </div>
+            <p>
+              {item.fishEmojis} {item.emojiDescription}
+            </p>
           </li>
         ))}
       </ul>

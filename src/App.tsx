@@ -30,7 +30,7 @@ const UI_ELEMENTS = {
 
 function App() {
   const [showStartMenu, setStartMenu] = useState<boolean>(false);
-  const [showInitialScreen, setShowInitialScreen] = useState<boolean>(true);
+  const [showInitialScreen, setShowInitialScreen] = useState<boolean>(false); // FIXME: only for testing
   const [openWindows, setOpenWindows] = useState<string[]>([]);
   const { height, width, isMobile } = useWindowDimensions();
   const calculatedMaxHeight = height * 0.8 - 60; // Calculate the max height of the floating window
