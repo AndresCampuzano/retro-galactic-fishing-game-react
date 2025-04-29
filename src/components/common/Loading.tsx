@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
 const images = [
-  "/public/images/poison_delay.png",
-  "/public/images/poison_leveling.png",
-  "/public/images/poison_recovery.png",
+  "images/poison_delay.png",
+  "images/poison_leveling.png",
+  "images/poison_recovery.png",
 ];
 
 export const Loading = () => {
