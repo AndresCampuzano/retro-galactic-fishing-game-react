@@ -28,7 +28,7 @@ function App() {
     data: leaderboardData,
     error: leaderboardError,
     loading: leaderboardLoading,
-    refetch: retryFetch,
+    refetch: retryFetchLeaderboard,
   } = useFetch(fetchGameLeaderboard, true);
 
   const {
@@ -151,6 +151,7 @@ function App() {
                 onClickOnAlreadyOpenedWindow(UI_ELEMENTS.leaderboard.title)
               }
               onCloseWindow={() => onCloseWindow(UI_ELEMENTS.leaderboard.title)}
+              onRefresh={retryFetchLeaderboard}
               img={UI_ELEMENTS.leaderboard.img}
               title={UI_ELEMENTS.leaderboard.title}
               defaultPosition={isMobile ? { x: 0, y: 0 } : { x: 120, y: 10 }}
@@ -165,7 +166,7 @@ function App() {
                 data={leaderboardData}
                 loading={leaderboardLoading}
                 error={leaderboardError}
-                retryFetch={retryFetch}
+                retryFetch={retryFetchLeaderboard}
               />
             </Window>
           )}
@@ -176,6 +177,7 @@ function App() {
                 onClickOnAlreadyOpenedWindow(UI_ELEMENTS.gameMarket.title)
               }
               onCloseWindow={() => onCloseWindow(UI_ELEMENTS.gameMarket.title)}
+              onRefresh={retryFetchGameMarket}
               img={UI_ELEMENTS.gameMarket.img}
               title={UI_ELEMENTS.gameMarket.title}
               defaultPosition={isMobile ? { x: 0, y: 0 } : { x: 120, y: 10 }}
