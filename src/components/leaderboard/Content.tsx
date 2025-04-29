@@ -134,7 +134,7 @@ export const Content = ({
           </div>
         </div>
         {loading && (
-          <div className="flex justify-center items-center h-64">
+          <div className="flex justify-center items-center h-fit lg:h-64">
             <Loading />
           </div>
         )}
