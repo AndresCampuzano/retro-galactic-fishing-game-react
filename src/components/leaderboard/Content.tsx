@@ -133,7 +133,11 @@ export const Content = ({
             </select>
           </div>
         </div>
-        {loading && <Loading />}
+        {loading && (
+          <div className="flex justify-center items-center h-64">
+            <Loading />
+          </div>
+        )}
         {error && <ErrorMessage error={error} retryFetch={retryFetch} />}
       </section>
 
