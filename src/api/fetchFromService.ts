@@ -69,15 +69,10 @@ export async function fetchFromService<T>(
     if (!response.ok) {
       let errorMessage = `Error ${response.status}: ${response.statusText}`;
 
-      try {
-        const errorBody = await response.json();
-        if (errorBody?.message) {
-          errorMessage = errorBody.message;
-        }
-      } catch {
-        // If parsing JSON fails, use the default error message
+      const errorBody = await response.json();
+      if (errorBody?.message) {
+        errorMessage = errorBody.message;
       }
-
       throw new Error(errorMessage);
     }
 
