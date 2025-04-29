@@ -1,4 +1,4 @@
-import { PrimaryButton } from "../PrimaryButton.tsx";
+import { PrimaryButton } from "./PrimaryButton.tsx";
 
 export const ErrorMessage = ({
   error,

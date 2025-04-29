@@ -8,7 +8,7 @@ import { useWindowDimensions } from "./hooks/useWindowDimensions.ts";
 import { Content as LeaderboardContent } from "./components/leaderboard/Content.tsx";
 import { Content as GameMarketContent } from "./components/game-market/Content.tsx";
 import { AboutContent } from "./components/floating-windows-content/AboutContent.tsx";
-import { PrimaryButton } from "./components/PrimaryButton.tsx";
+import { PrimaryButton } from "./components/common/PrimaryButton.tsx";
 import { InitialScreen } from "./components/InitialScreen.tsx";
 import { useFetch } from "./hooks/useFetch.ts";
 import { fetchGameLeaderboard, fetchGameMarket } from "./api/game.service.ts";
@@ -60,7 +60,7 @@ function App() {
 
   useEffect(() => {
     // Opening windows when page loads
-    setOpenWindows([UI_ELEMENTS.gameMarket.title]); // TODO: only for testing
+    setOpenWindows([UI_ELEMENTS.leaderboard.title]);
   }, []);
 
   /**

@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { ErrorMessage } from "../common/ErrorMessage";
 import { Item } from "./Item.tsx";
+import { Loading } from "../common/Loading.tsx";
 
 const SORTING = {
   RANK: "rank",
@@ -132,7 +133,7 @@ export const Content = ({
             </select>
           </div>
         </div>
-        {loading && <p>Loading...</p>}
+        {loading && <Loading />}
         {error && <ErrorMessage error={error} retryFetch={retryFetch} />}
       </section>
 
