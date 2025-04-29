@@ -51,7 +51,6 @@ export const Content = ({
       );
     });
 
-    // Sort based on the selected option
     return filtered.sort((a, b) => {
       if (sortOption === SORTING.RANK) return a.rank - b.rank;
       if (sortOption === SORTING.LEVEL) return b.level - a.level;
@@ -83,19 +82,19 @@ export const Content = ({
             alt="gold coin"
             className="w-6 object-contain"
           />
-          <p className="text-xl">Gold</p>
+          <p className="text-xl">1st Place</p>
           <img
             src="images/coin_silver_x2.png"
             alt="silver coin"
             className="w-6 object-contain"
           />
-          <p className="text-xl">Silver</p>
+          <p className="text-xl">2nd Place</p>
           <img
             src="images/coin_bronze_x2.png"
             alt="bronze coin"
             className="w-6 object-contain"
           />
-          <p className="text-xl">Bronze</p>
+          <p className="text-xl">3rd Place</p>
         </div>
         <div className="flex flex-wrap gap-4 mb-4 items-center">
           <div className="relative flex items-center w-full md:max-w-[60%]">
@@ -141,7 +140,7 @@ export const Content = ({
         <ul className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
           {filteredPlayers?.map((item) => (
             <Item
-              key={item.username}
+              key={item.username} // assuming username is unique
               rank={item.rank}
               username={item.username}
               level={item.level}

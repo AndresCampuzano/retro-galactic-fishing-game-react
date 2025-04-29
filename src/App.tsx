@@ -157,7 +157,7 @@ function App() {
               style={{
                 zIndex: getZIndex(UI_ELEMENTS.leaderboard.title),
                 width: isMobile ? width : width - 200,
-                maxWidth: 1000,
+                maxWidth: 1200,
                 height: windowHeight,
               }}
             >
@@ -182,7 +182,7 @@ function App() {
               style={{
                 zIndex: getZIndex(UI_ELEMENTS.gameMarket.title),
                 width: isMobile ? width : width - 200,
-                maxWidth: 1000,
+                maxWidth: 1200,
                 height: windowHeight,
               }}
             >
@@ -207,7 +207,7 @@ function App() {
               style={{
                 zIndex: getZIndex(UI_ELEMENTS.aboutMe.title),
                 width: isMobile ? width : width - 200,
-                maxWidth: 1000,
+                maxWidth: 1200,
                 height: windowHeight,
               }}
             >
