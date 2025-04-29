@@ -16,7 +16,7 @@ import { UI_ELEMENTS } from "./constants.ts";
 
 function App() {
   const [showStartMenu, setStartMenu] = useState<boolean>(false);
-  const [showInitialScreen, setShowInitialScreen] = useState<boolean>(false); // FIXME: only for testing
+  const [showInitialScreen, setShowInitialScreen] = useState<boolean>(false); // TODO: only for testing
   const [openWindows, setOpenWindows] = useState<string[]>([]);
   const { height, width, isMobile } = useWindowDimensions();
   const calculatedMaxHeight = height - 80;
@@ -60,7 +60,7 @@ function App() {
 
   useEffect(() => {
     // Opening windows when page loads
-    setOpenWindows([UI_ELEMENTS.gameMarket.title]); // FIXME: only for testing
+    setOpenWindows([UI_ELEMENTS.gameMarket.title]); // TODO: only for testing
   }, []);
 
   /**
