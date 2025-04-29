@@ -1,4 +1,6 @@
-export const CardItem = ({
+import { formatCurrency } from "../utils/numbers.ts";
+
+export const LeaderboardItem = ({
   rank,
   username,
   level,
@@ -66,7 +68,7 @@ export const CardItem = ({
       </div>
       <div className="flex gap-1 items-center">
         <img src="images/coin_gold_x2.png" alt="gold coin" className="w-6" />
-        <p className="">Gold {gold}</p>
+        <p className="">Gold {formatCurrency(gold)}</p>
       </div>
       <p>
         {fishEmojis} {emojiDescription}

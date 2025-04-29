@@ -16,7 +16,7 @@ interface Player {
 interface Item {
   id: string;
   name: string;
-  type: string;
+  type: "poison_delay" | "poison_recovery" | "poison_leveling" | "fishing_rod";
   description: string;
   cost: number;
 }

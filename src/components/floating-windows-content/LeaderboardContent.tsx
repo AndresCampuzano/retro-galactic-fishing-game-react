@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { ErrorMessage } from "../common/ErrorMessage";
-import { CardItem } from "../CardItem";
+import { LeaderboardItem } from "../LeaderboardItem.tsx";
 
 const SORTING = {
   RANK: "rank",
@@ -140,7 +140,7 @@ export const LeaderboardContent = ({
       <section>
         <ul className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
           {filteredPlayers?.map((item) => (
-            <CardItem
+            <LeaderboardItem
               key={item.username}
               rank={item.rank}
               username={item.username}
