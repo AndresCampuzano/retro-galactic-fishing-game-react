@@ -1,6 +1,6 @@
-import { formatCurrency } from "../utils/numbers.ts";
+import { formatCurrency } from "../../utils/numbers.ts";
 
-export const GameMarketItem = ({
+export const Item = ({
   type,
   name,
   description,

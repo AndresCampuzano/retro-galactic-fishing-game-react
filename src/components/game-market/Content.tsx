@@ -1,7 +1,7 @@
 import { ErrorMessage } from "../common/ErrorMessage";
-import { GameMarketItem } from "../GameMarketItem.tsx";
+import { Item } from "./Item.tsx";
 
-export const GameMarketContent = ({
+export const Content = ({
   data,
   loading,
   error,
@@ -36,7 +36,7 @@ export const GameMarketContent = ({
       <section>
         <ul className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
           {data?.items?.map((item) => (
-            <GameMarketItem
+            <Item
               key={item.type}
               type={item.type}
               name={item.name}

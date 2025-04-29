@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { ErrorMessage } from "../common/ErrorMessage";
-import { LeaderboardItem } from "../LeaderboardItem.tsx";
+import { Item } from "./Item.tsx";
 
 const SORTING = {
   RANK: "rank",
@@ -10,7 +10,7 @@ const SORTING = {
   INFECTED: "infected",
 };
 
-export const LeaderboardContent = ({
+export const Content = ({
   data,
   loading,
   error,
@@ -140,7 +140,7 @@ export const LeaderboardContent = ({
       <section>
         <ul className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
           {filteredPlayers?.map((item) => (
-            <LeaderboardItem
+            <Item
               key={item.username}
               rank={item.rank}
               username={item.username}
