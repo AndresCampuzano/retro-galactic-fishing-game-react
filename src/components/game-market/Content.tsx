@@ -24,7 +24,7 @@ export const Content = ({
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
   const [sortOption, setSortOption] = useState(SORTING.COST_HIGH_TO_LOW); // Default sort by cost high to low
 
-  // NOTE: I'm simulating a delay here, debounce is often used to prevent excessive API requests,
+  // NOTE: I'm simulating a delay here, a debounce is often used to prevent excessive API requests when user types,
   // but since we're not making any API calls when searchTerm changes, it's just for the sake of the example.
   useEffect(() => {
     const handler = setTimeout(() => {
