@@ -94,13 +94,16 @@ export const Window = ({
               <h2>{title}</h2>
             </div>
             <div className="flex justify-center items-center gap-2">
-              <button
-                type="button"
-                onClick={onRefresh}
-                className="flex justify-center items-center p-[2px] h-[23px] w-[23px] bg-[#c3c3c3] border-t-[2.5px] border-l-[2.5px] border-l-white border-t-white border-r-[2.5px] border-r-black border-b-[2.5px] border-b-black cursor-pointer  active:bg-gray-500"
-              >
-                <img src="images/refresh-icon.png" alt="reload" width={40} />
-              </button>
+              {onRefresh && (
+                <button
+                  type="button"
+                  onClick={onRefresh}
+                  className="flex justify-center items-center p-[2px] h-[23px] w-[23px] bg-[#c3c3c3] border-t-[2.5px] border-l-[2.5px] border-l-white border-t-white border-r-[2.5px] border-r-black border-b-[2.5px] border-b-black cursor-pointer  active:bg-gray-500"
+                >
+                  <img src="images/refresh-icon.png" alt="reload" width={40} />
+                </button>
+              )}
+
               <button
                 type="button"
                 onClick={onCloseWindow}
