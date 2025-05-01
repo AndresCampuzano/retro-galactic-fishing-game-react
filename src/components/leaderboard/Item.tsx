@@ -56,7 +56,9 @@ export const Item = ({
       )}
       <div className="flex flex-col items-center mb-2">
         <p className="text-lg leading-none">#{rank}</p>
-        <p className="text-xl leading-none">{username}</p>
+        <p className="sm:text-xl md:text-lg lg:text-xl leading-none">
+          {username}
+        </p>
       </div>
       <div className="flex gap-1 items-center">
         <img
