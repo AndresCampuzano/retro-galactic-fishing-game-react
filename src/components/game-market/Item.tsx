@@ -26,7 +26,17 @@ export const Item = ({
       }`}
     >
       <img
-        src={`images/${type}.png`}
+        src={
+          [
+            "poison_delay",
+            "poison_recovery",
+            "poison_leveling",
+            "fishing_rod",
+            "poison_reveal_fishes",
+          ].includes(type)
+            ? `images/${type}.png`
+            : "images/hearts.png"
+        }
         alt={type}
         className="w-7 absolute -top-7 left-1/2 transform -translate-x-1/2"
       />
