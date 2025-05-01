@@ -118,8 +118,9 @@ export const Content = ({
             )}
           </div>
           <div className="flex items-center gap-2">
-            <p>Sort by:</p>
+            <label htmlFor="sortOption">Sort by:</label>
             <select
+              id="sortOption"
               value={sortOption}
               disabled={loading || error !== null}
               onChange={(e) => setSortOption(e.target.value)}
