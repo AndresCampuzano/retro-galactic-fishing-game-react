@@ -35,7 +35,7 @@ export const StartMenu = ({
         >
           <img
             src={UI_ELEMENTS.leaderboard.img}
-            alt={UI_ELEMENTS.leaderboard.title}
+            alt="round world icon"
             width="35px"
           />
           <p className="ml-[10px] text-[1.2rem]">
@@ -49,7 +49,7 @@ export const StartMenu = ({
         >
           <img
             src={UI_ELEMENTS.gameMarket.img}
-            alt={UI_ELEMENTS.gameMarket.title}
+            alt="opened book"
             width="35px"
           />
           <p className="ml-[10px] text-[1.2rem]">
@@ -63,7 +63,7 @@ export const StartMenu = ({
         >
           <img
             src={UI_ELEMENTS.aboutMe.img}
-            alt={UI_ELEMENTS.aboutMe.title}
+            alt="little desktop computer icon"
             width="35px"
           />
           <p className="ml-[10px] text-[1.2rem]">{UI_ELEMENTS.aboutMe.title}</p>

@@ -40,7 +40,7 @@ export const Item = ({
                 ? "coin_silver"
                 : "coin_bronze"
           }_x2.png`}
-          alt="rank coin"
+          alt="pixeled rank coin"
           title={`Rank ${rank}`}
           className="w-10 absolute -top-4 -left-4"
         />
@@ -49,7 +49,7 @@ export const Item = ({
       {isInfected && (
         <img
           src="images/spider.png"
-          alt="spider card"
+          alt="pixeled spider card"
           title="Infected player"
           className="w-8 absolute -top-4 -right-4"
         />
@@ -59,15 +59,27 @@ export const Item = ({
         <p className="text-xl leading-none">{username}</p>
       </div>
       <div className="flex gap-1 items-center">
-        <img src="images/freecell.png" alt="freecell level" className="w-5" />
+        <img
+          src="images/freecell.png"
+          alt="pixeled freecell level"
+          className="w-5"
+        />
         <p className="ml-1">Level {formatNumber(level)}</p>
       </div>
       <div className="flex gap-1 items-center">
-        <img src="images/joystick.png" alt="joystick xp" className="w-5" />
+        <img
+          src="images/joystick.png"
+          alt="pixeled joystick xp"
+          className="w-5"
+        />
         <p className="ml-1">XP {formatNumber(xp)}</p>
       </div>
       <div className="flex gap-1 items-center">
-        <img src="images/coin_gold_x2.png" alt="gold coin" className="w-6" />
+        <img
+          src="images/coin_gold_x2.png"
+          alt="pixeled gold coin"
+          className="w-6"
+        />
         <p className="">Gold {formatNumber(gold)}</p>
       </div>
       <p>

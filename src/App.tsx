@@ -228,7 +228,7 @@ function App() {
         <PrimaryButton onClick={handleStartMenu} id="start-menu-button">
           <img
             src="images/windows-logo.png"
-            alt="windows logo"
+            alt="Windows 95 Logo"
             className="w-7 h-7 object-contain"
           />
           {!(isMobile && openWindows.length > 2) && <p>Start</p>}
@@ -242,7 +242,7 @@ function App() {
           >
             <img
               src={UI_ELEMENTS.leaderboard.img}
-              alt={UI_ELEMENTS.leaderboard.title}
+              alt="round world icon"
               className="w-7 h-7 object-contain"
             />
             <p className="hidden sm:block leading-[0.8]">
@@ -259,7 +259,7 @@ function App() {
           >
             <img
               src={UI_ELEMENTS.gameMarket.img}
-              alt={UI_ELEMENTS.gameMarket.title}
+              alt="opened book"
               className="w-7 h-7 object-contain"
             />
             <p className="hidden sm:block leading-[0.8]">
@@ -276,7 +276,7 @@ function App() {
           >
             <img
               src={UI_ELEMENTS.aboutMe.img}
-              alt={UI_ELEMENTS.aboutMe.title}
+              alt="little desktop computer icon"
               className="w-7 h-7 object-contain"
             />
             <p className="hidden sm:block leading-[0.8]">
