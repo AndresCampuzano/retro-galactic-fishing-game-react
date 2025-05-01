@@ -1,4 +1,4 @@
-import { formatCurrency } from "../../utils/numbers.ts";
+import { formatNumber } from "../../utils/numbers.ts";
 
 export const Item = ({
   rank,
@@ -60,15 +60,15 @@ export const Item = ({
       </div>
       <div className="flex gap-1 items-center">
         <img src="images/freecell.png" alt="freecell level" className="w-5" />
-        <p className="ml-1">Level {level}</p>
+        <p className="ml-1">Level {formatNumber(level)}</p>
       </div>
       <div className="flex gap-1 items-center">
         <img src="images/joystick.png" alt="joystick xp" className="w-5" />
-        <p className="ml-1">XP {xp}</p>
+        <p className="ml-1">XP {formatNumber(xp)}</p>
       </div>
       <div className="flex gap-1 items-center">
         <img src="images/coin_gold_x2.png" alt="gold coin" className="w-6" />
-        <p className="">Gold {formatCurrency(gold)}</p>
+        <p className="">Gold {formatNumber(gold)}</p>
       </div>
       <p>
         {fishEmojis} {emojiDescription}

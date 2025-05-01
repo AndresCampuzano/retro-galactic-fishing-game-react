@@ -1,4 +1,4 @@
-import { formatCurrency } from "../../utils/numbers.ts";
+import { formatNumber } from "../../utils/numbers.ts";
 
 export const Item = ({
   type,
@@ -6,7 +6,7 @@ export const Item = ({
   description,
   cost,
 }: {
-  type: string;
+  type: Item["type"];
   name: string;
   description: string;
   cost: number;
@@ -20,7 +20,9 @@ export const Item = ({
             ? "bg-[#D3984A]"
             : type === "poison_recovery"
               ? "bg-[#E66D31]"
-              : "bg-[#B6B5B5]"
+              : type === "poison_reveal_fishes"
+                ? "bg-[#4CAF50]"
+                : "bg-[#B6B5B5]"
       }`}
     >
       <img
@@ -32,7 +34,7 @@ export const Item = ({
       <p className="leading-4">{description}</p>
       <p className="text-lg font-bold mt-auto mb-2 pt-2">
         <img src="images/coin_gold_x2.png" alt="gold" className="w-6 inline" />
-        {formatCurrency(cost)}
+        {formatNumber(cost)}
       </p>
     </li>
   );
