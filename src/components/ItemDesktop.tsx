@@ -24,7 +24,7 @@ export const ItemDesktop = ({
     >
       <img
         src={img}
-        alt={`${img} icon`}
+        alt={`${title} icon`}
         style={{ width: imageSize, height: imageSize }}
         draggable="false"
         className="select-none"
